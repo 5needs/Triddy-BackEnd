@@ -1,8 +1,9 @@
 plugins {
-	id "org.sonarqube" version "3.1.1"
 	id 'org.springframework.boot' version '2.4.4'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id "org.sonarqube" version "3.1.1"
+	id 'jacoco'
 }
 
 group = 'edu.eci.ieti'
@@ -14,14 +15,15 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	// implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
+	// testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
 }
 
 test {
 	useJUnitPlatform()
+	finalizedBy jacocoTestReport
 }
 
 sonarqube {
@@ -31,3 +33,13 @@ sonarqube {
     property "sonar.host.url", "https://sonarcloud.io"
   }
 }
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+		html.enabled true
+        html.destination file("${rootProject.projectDir}/build/reports/jacoco/report.html")
+		xml.destination file("${rootProject.projectDir}/build/reports/jacoco/report.xml")
+    }
+}
+
