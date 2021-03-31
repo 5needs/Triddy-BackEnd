@@ -38,8 +38,8 @@ jacocoTestReport {
     reports {
         xml.enabled true
 		html.enabled true
-        html.destination file("${rootProject.projectDir}/build/reports/jacoco/jacocoHtml")
-		xml.destination file("${rootProject.projectDir}/build/reports/jacoco/jacocoHtml")
+        html.destination file("${rootProject.projectDir}/build/reports/jacoco/report.html")
+		xml.destination file("${rootProject.projectDir}/build/reports/jacoco/report.xml")
     }
 }
 
