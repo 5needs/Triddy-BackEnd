@@ -19,8 +19,10 @@ public class TriddyUserTest {
         User user = new User("test@mail.com", "tester");
         user.setEmail("other@mail.com");
         user.setName("other");
+        user.setId("AB2");
         assertEquals("other", user.getName());
         assertEquals("other@mail.com", user.getEmail());
+        assertEquals("AB2", user.getId());
     }
 
     @Test

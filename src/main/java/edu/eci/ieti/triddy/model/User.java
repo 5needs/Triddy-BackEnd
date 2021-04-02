@@ -1,6 +1,10 @@
 package edu.eci.ieti.triddy.model;
 
+import org.springframework.data.annotation.Id;
+
 public class User {
+    @Id
+    private String id;
     private String email;
     private String name;
 
@@ -24,6 +28,15 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     
     @Override
     public String toString() {
