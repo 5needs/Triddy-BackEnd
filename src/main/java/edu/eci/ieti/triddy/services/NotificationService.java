@@ -13,5 +13,7 @@ public interface NotificationService {
     Notification setNotification(Notification notification);
 
     void delNotifications(List<String> notifIds);
+
+    void delNotificationsUser(String user);
     
 }

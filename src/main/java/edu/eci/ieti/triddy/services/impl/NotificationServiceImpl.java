@@ -42,5 +42,10 @@ public class NotificationServiceImpl implements NotificationService{
             notificationRepository.deleteById(str);
         }
     }
+
+    @Override
+    public void delNotificationsUser(String user){
+        notificationRepository.deleteByUser(user);
+    }
     
 }

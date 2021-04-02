@@ -13,9 +13,6 @@ public class Notification {
     private String content;
     private String link;
 
-    public Notification() {
-    }
-
     public Notification(String user, String type, Date date, String content, String link) {
         this.user = user;
         this.type = type;
