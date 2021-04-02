@@ -11,30 +11,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.eci.ieti.triddy.model.Notification;
-import edu.eci.ieti.triddy.repository.NotificationRepository;
+import edu.eci.ieti.triddy.services.NotificationService;
 
 @RestController
 @RequestMapping("/api/notification")
 public class NotificationController {
-    
     @Autowired
-    private NotificationRepository notificationRepository;
+    private NotificationService notificationService;
 
     @GetMapping
     public List<Notification> getNotification(){
-        return notificationRepository.findAll();
+        return notificationService.getNotifications();
     }
 
     @PostMapping
     public Notification postNotification(@RequestBody Notification notif){
-        notificationRepository.save(notif);
-        return notif;
+        return notificationService.setNotification(notif);
     }
 
     @DeleteMapping
     public void deleteNotifications(@RequestBody List<String> notifIds){
-        for (String str: notifIds){
-            notificationRepository.deleteById(str);
-        }
+        notificationService.delNotifications(notifIds);
     }
 }
