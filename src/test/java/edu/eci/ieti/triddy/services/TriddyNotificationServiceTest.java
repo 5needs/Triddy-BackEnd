@@ -49,8 +49,8 @@ public class TriddyNotificationServiceTest {
     @Test
     void delByUserNotificationTest(){
         int lon = notificationService.getNotifications("user@test.com").size();
-        notificationService.setNotification( new Notification("user@test.com", "Type1", new Date(), "A content for test", "https://www.google.com/"));
-        notificationService.setNotification( new Notification("user@test.com", "Type2", new Date(), "A content for other test", "https://www.google.com/"));
+        notificationService.setNotification(new Notification("user@test.com", "Type1", new Date(), "A content for test", "https://www.google.com/"));
+        notificationService.setNotification(new Notification("user@test.com", "Type2", new Date(), "A content for other test", "https://www.google.com/"));
         int lon2 = notificationService.getNotifications("user@test.com").size();
 
         assertNotEquals(lon, lon2);
