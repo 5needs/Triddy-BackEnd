@@ -9,17 +9,34 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import edu.eci.ieti.triddy.model.Notification;
+import edu.eci.ieti.triddy.model.User;
+import edu.eci.ieti.triddy.repository.UserRepository;
 
 @SpringBootTest
 public class TriddyNotificationServiceTest {
 
     @Autowired
     NotificationService notificationService;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @BeforeEach
+    void setTestUser(){
+        userRepository.save(new User("user@test.com", "tester"));
+    }
+
+    @AfterEach
+    void delTestUser(){
+        userRepository.deleteByEmail("user@test.com");
+    }
 
     @Test
     void setNotValidNotificationTest(){
