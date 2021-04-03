@@ -20,9 +20,9 @@ public class NotificationController {
     @Autowired
     private NotificationService notificationService;
 
-    @GetMapping
-    public List<Notification> getNotification(){
-        return notificationService.getNotifications();
+    @GetMapping("/{email}")
+    public List<Notification> getNotifications(@PathVariable String email){
+        return notificationService.getNotifications(email);
     }
 
     @PostMapping
@@ -36,7 +36,7 @@ public class NotificationController {
     }
 
     @DeleteMapping("/{email}")
-    public void deleteNotifications(@PathVariable String email){
+    public void deleteNotificationsUser(@PathVariable String email){
         notificationService.delNotificationsUser(email);
     }
 }

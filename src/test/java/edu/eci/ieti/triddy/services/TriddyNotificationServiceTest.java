@@ -14,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import edu.eci.ieti.triddy.model.Notification;
-import edu.eci.ieti.triddy.model.User;
-import edu.eci.ieti.triddy.repository.UserRepository;
 
 @SpringBootTest
 public class TriddyNotificationServiceTest {
@@ -23,56 +21,42 @@ public class TriddyNotificationServiceTest {
     @Autowired
     NotificationService notificationService;
 
-    @Autowired
-    UserRepository userRepository;
-
-    @Test
-    void getNotificationsTest(){
-        assertNotNull(notificationService.getNotifications());
-    }
-
     @Test
     void setNotValidNotificationTest(){
-        int lon = notificationService.getNotifications().size();
-        Notification notification = new Notification("user@test.com", "Type1", new Date(), "A content for test", "https://www.google.com/");
-        Notification response = notificationService.setNotification(notification);
-        int lon2 = notificationService.getNotifications().size();
+        int lon = notificationService.getNotifications("other@test.com").size();
+        Notification notification = new Notification("other@test.com", "Type1", new Date(), "A content for test", "https://www.google.com/");
+        Notification response = notificationService.setNotification(notification);    
+        int lon2 = notificationService.getNotifications("other@test.com").size();
         assertNull(response);
         assertEquals(lon, lon2);
     }
 
     @Test
     void delByIdNotificationTest(){
-        User user = userRepository.save(new User("user@test.com", "tester"));
-
-        int lon = notificationService.getNotifications().size();
+        int lon = notificationService.getNotifications("user@test.com").size();
         Notification notification = new Notification("user@test.com", "Type1", new Date(), "A content for test", "https://www.google.com/");
         Notification response = notificationService.setNotification(notification);
-        int lon2 = notificationService.getNotifications().size();
+        int lon2 = notificationService.getNotifications("user@test.com").size();
         assertNotNull(response);
         assertNotEquals(lon, lon2);
 
         List<String> ids = new ArrayList<String>();
         ids.add(response.getId());
         notificationService.delNotifications(ids);
-        assertEquals(lon, notificationService.getNotifications().size());
-
-        userRepository.deleteById(user.getId());
+        assertEquals(lon, notificationService.getNotifications("user@test.com").size());
     }
 
     @Test
     void delByUserNotificationTest(){
-        User user = userRepository.save(new User("user@test.com", "tester"));
-        int lon = notificationService.getNotifications().size();
+        int lon = notificationService.getNotifications("user@test.com").size();
         notificationService.setNotification( new Notification("user@test.com", "Type1", new Date(), "A content for test", "https://www.google.com/"));
         notificationService.setNotification( new Notification("user@test.com", "Type2", new Date(), "A content for other test", "https://www.google.com/"));
-        int lon2 = notificationService.getNotifications().size();
+        int lon2 = notificationService.getNotifications("user@test.com").size();
 
         assertNotEquals(lon, lon2);
-        notificationService.delNotificationsUser(user.getEmail());
-        assertEquals(lon, notificationService.getNotifications().size());
+        notificationService.delNotificationsUser("user@test.com");
+        assertEquals(lon, notificationService.getNotifications("user@test.com").size());
 
-        userRepository.delete(user);
 
     }
 

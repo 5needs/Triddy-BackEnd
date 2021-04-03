@@ -21,12 +21,12 @@ public class NotificationServiceImpl implements NotificationService{
     private UserRepository userRepository;
 
     @Override
-    public List<Notification> getNotifications() {
-        return notificationRepository.findAll();
+    public List<Notification> getNotifications(String email) {
+        return notificationRepository.findByUser(email);
     }
 
     @Override
-    public Notification setNotification(Notification notification) {
+    public Notification setNotification(Notification notification){
         User user = userRepository.findByEmail(notification.getUser());
         if (user != null){
             return notificationRepository.save(notification);

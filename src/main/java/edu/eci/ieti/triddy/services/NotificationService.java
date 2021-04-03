@@ -8,7 +8,7 @@ import edu.eci.ieti.triddy.model.Notification;
  */
 public interface NotificationService {
 
-    List<Notification> getNotifications();
+    List<Notification> getNotifications(String email);
 
     Notification setNotification(Notification notification);
 
