@@ -10,7 +10,7 @@ public class TriddyUserTest {
     
     @Test
     void createUser(){
-        User user = new User("user@test.com", "123ABC", "tester", "test U", "example career");
+        User user = new User("user@test.com", "123ABC", "tester", "test U", "example career", null);
         assertEquals("tester", user.getFullname());
         assertEquals("user@test.com", user.getEmail());
         assertEquals("123ABC", user.getPassword());
@@ -18,7 +18,7 @@ public class TriddyUserTest {
 
     @Test
     void validBasicSetMethods(){
-        User user = new User("user@mail.com", "123ABC", "tester", "test U", "example career");
+        User user = new User("user@mail.com", "123ABC", "tester", "test U", "example career", null);
 
         user.setEmail("other@mail.com");
         assertEquals("other@mail.com", user.getEmail());
@@ -38,14 +38,14 @@ public class TriddyUserTest {
 
     @Test
     void validOtherSetsUser(){
-        User user = new User("user@mail.com", "123ABC", "tester", "test U", "example career");
+        User user = new User("user@mail.com", "123ABC", "tester", "test U", "example career", null);
         user.setPicture("http://url.com");
         assertEquals("http://url.com", user.getPicture());
     }
 
     @Test
     void validToStringMethod(){
-        User user = new User("user@test.com", "123ABC", "tester", "test U", "example career");
+        User user = new User("user@test.com", "123ABC", "tester", "test U", "example career", null);
         String expected = String.format("User[ email='%s', password='%s', fullname='%s', university='%s', carrer='%s' ]", "user@test.com", "123ABC", "tester", "test U", "example career");
         assertEquals(expected, user.toString());
     }

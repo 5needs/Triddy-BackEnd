@@ -33,12 +33,11 @@ public class UserController {
 
     @PostMapping
     public User postUser(@RequestBody User user){
-        return userService.setUser(user);
+        return userService.createUser(user);
     }
 
     @DeleteMapping("/{email}")
     public void delUser(@PathVariable String email){
         userService.delUser(email);;
     }
-    
 }

@@ -1,6 +1,10 @@
 package edu.eci.ieti.triddy.model;
 
+import org.springframework.data.annotation.Id;
+
 public class User {
+    @Id
+    private String id;
     private String email;
     private String password;
     private String fullname;
@@ -8,14 +12,15 @@ public class User {
     private String university;
     private String career;
 
-    public User(String email, String password, String fullname, String university, String career) {
+    public User(String email, String password, String fullname, String university, String career, String picture) {
         this.email = email;
         this.password = password;
         this.fullname = fullname;
         this.university = university;
         this.career = career;
+        this.picture = picture;
     }
-
+    
     public String getEmail() {
         return this.email;
     }
@@ -63,6 +68,7 @@ public class User {
     public void setCareer(String career) {
         this.career = career;
     }
+
 
     @Override
     public String toString() {

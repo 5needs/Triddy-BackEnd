@@ -11,6 +11,10 @@ public interface UserService {
     
     List<User> getUsers();
     User getUser(String email);
-    User setUser(User user);
+    User createUser(User user);
     void delUser(String user);
+    void changeFullname(User user);
+    void changeUniversity(User user);
+    void changeCareer(User user);
+    void changePicture(User user);
 }

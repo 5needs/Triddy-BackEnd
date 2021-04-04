@@ -9,6 +9,9 @@ import edu.eci.ieti.triddy.model.User;
 import edu.eci.ieti.triddy.repository.UserRepository;
 import edu.eci.ieti.triddy.services.UserService;
 
+/**
+ * @author Ricar8o
+ */
 @Service
 public class UserServiceImpl implements UserService{
 
@@ -17,7 +20,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public List<User> getUsers() {
-        return userRepository.findAll();
+        return (List<User>) userRepository.findAll();
     }
 
     @Override
@@ -26,7 +29,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User setUser(User user) {
+    public User createUser(User user) {
         User res = userRepository.findByEmail(user.getEmail());
         if (res == null){
             return userRepository.save(user);
@@ -38,6 +41,34 @@ public class UserServiceImpl implements UserService{
     @Override
     public void delUser(String user) {
         userRepository.deleteByEmail(user);
+    }
+
+    @Override
+    public void changeFullname(User user) {
+        User res = userRepository.findByEmail(user.getEmail());
+        res.setFullname(user.getFullname());
+        userRepository.save(res);
+    }
+
+    @Override
+    public void changeUniversity(User user) {
+        User res = userRepository.findByEmail(user.getEmail());
+        res.setUniversity(user.getUniversity());
+        userRepository.save(res);    
+    }
+
+    @Override
+    public void changeCareer(User user) {
+        User res = userRepository.findByEmail(user.getEmail());
+        res.setCareer(user.getCareer());
+        userRepository.save(res);    
+    }
+
+    @Override
+    public void changePicture(User user) {
+        User res = userRepository.findByEmail(user.getEmail());
+        res.setPicture(user.getPicture());
+        userRepository.save(res);    
     }
     
 }
