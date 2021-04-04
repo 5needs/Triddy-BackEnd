@@ -3,6 +3,8 @@ package edu.eci.ieti.triddy.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.eci.ieti.triddy.exceptions.TriddyServiceException;
+import edu.eci.ieti.triddy.exceptions.UserNotFoundException;
 import edu.eci.ieti.triddy.model.User;
 import edu.eci.ieti.triddy.services.UserService;
 
@@ -27,17 +31,31 @@ public class UserController {
     }
 
     @GetMapping("/{email}")
-    public User getUser(@PathVariable String email){
-        return userService.getUser(email);
+    public ResponseEntity<?> getUser(@PathVariable String email){
+        try {
+            return new ResponseEntity<>(userService.getUser(email),HttpStatus.OK);
+        } catch (UserNotFoundException e) {
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping
-    public User postUser(@RequestBody User user){
-        return userService.createUser(user);
+    public ResponseEntity<?> postUser(@RequestBody User user){
+        try {
+            return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
+        } catch (TriddyServiceException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
+    
     }
 
     @DeleteMapping("/{email}")
-    public void delUser(@PathVariable String email){
-        userService.delUser(email);;
+    public ResponseEntity<?> delUser(@PathVariable String email){
+        try {
+            userService.delUser(email);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (UserNotFoundException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
     }
 }
