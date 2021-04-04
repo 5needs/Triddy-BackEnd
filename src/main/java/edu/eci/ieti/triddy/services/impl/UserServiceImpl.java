@@ -9,6 +9,8 @@ import edu.eci.ieti.triddy.model.User;
 import edu.eci.ieti.triddy.repository.UserRepository;
 import edu.eci.ieti.triddy.services.UserService;
 
+import org.apache.shiro.crypto.hash.Sha512Hash;
+
 /**
  * @author Ricar8o
  */
@@ -32,6 +34,7 @@ public class UserServiceImpl implements UserService{
     public User createUser(User user) {
         User res = userRepository.findByEmail(user.getEmail());
         if (res == null){
+            user.setPassword(new Sha512Hash(user.getPassword()).toHex());
             return userRepository.save(user);
         }else{
             return null;
