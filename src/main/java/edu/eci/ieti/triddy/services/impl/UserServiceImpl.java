@@ -105,5 +105,16 @@ public class UserServiceImpl implements UserService{
             throw new UserNotFoundException(user.getEmail());
         }   
     }
+
+    @Override
+    public void changeFavorites(String user, List<String> favorites) throws UserNotFoundException {
+        User res = userRepository.findByEmail(user); 
+        if (res != null){
+            res.setFavorites(favorites);
+            userRepository.save(res);  
+        }else{
+            throw new UserNotFoundException(user);
+        }   
+    }
     
 }

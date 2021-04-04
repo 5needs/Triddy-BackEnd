@@ -1,5 +1,7 @@
 package edu.eci.ieti.triddy.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 
 public class User {
@@ -11,14 +13,16 @@ public class User {
     private String picture;
     private String university;
     private String career;
+    private List<String> favorites;
 
-    public User(String email, String password, String fullname, String university, String career, String picture) {
+    public User(String email, String password, String fullname, String university, String career, String picture, List<String> favorites) {
         this.email = email;
         this.password = password;
         this.fullname = fullname;
         this.university = university;
         this.career = career;
         this.picture = picture;
+        this.favorites = favorites;
     }
     
     public String getEmail() {
@@ -69,10 +73,18 @@ public class User {
         this.career = career;
     }
 
+    public List<String> getFavorites() {
+        return this.favorites;
+    }
+
+    public void setFavorites(List<String> favorites) {
+        this.favorites = favorites;
+    }
+
 
     @Override
     public String toString() {
-        return String.format("User[ email='%s', password='%s', fullname='%s', university='%s', carrer='%s' ]",email,password,fullname,university,career);
+        return String.format("User[ email='%s', password='%s', fullname='%s', university='%s', career='%s' ]",email,password,fullname,university,career);
     }
 
 }
