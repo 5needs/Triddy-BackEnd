@@ -16,7 +16,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 @SpringBootTest
-public class JwtFilterTest {
+class JwtFilterTest {
 
     JwtFilter jwtFilter = new JwtFilter();
 
@@ -45,6 +45,18 @@ public class JwtFilterTest {
         } catch (Exception e){
             fail();
         }
+    }
+
+    @Test
+    void requestWithTokenInvalid() throws IOException, ServletException{
+        try {
+            MockHttpServletRequest request = new MockHttpServletRequest();
+            request.addHeader("authorization", "Bearer " + "token invalido");
+            MockHttpServletResponse resp = new MockHttpServletResponse();
+            MockFilterChain filterChain = new MockFilterChain();
+            jwtFilter.doFilter(request, resp, filterChain);
+            fail();
+        } catch (Exception e){ }
     }
 
     @Test
