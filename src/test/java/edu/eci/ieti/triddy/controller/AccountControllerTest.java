@@ -13,7 +13,7 @@ import edu.eci.ieti.triddy.model.User;
 import edu.eci.ieti.triddy.repository.UserRepository;
 
 @SpringBootTest
-public class AccountControllerTest {
+class AccountControllerTest {
     
     @Autowired
     AccountController accountController;

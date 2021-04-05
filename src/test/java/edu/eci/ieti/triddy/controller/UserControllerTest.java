@@ -17,7 +17,7 @@ import edu.eci.ieti.triddy.model.User;
 import edu.eci.ieti.triddy.repository.UserRepository;
 
 @SpringBootTest
-public class UserControllerTest {
+class UserControllerTest {
 
     @Autowired
     UserController userController;

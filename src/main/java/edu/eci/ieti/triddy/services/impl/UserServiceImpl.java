@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public List<User> getUsers() {
-        return (List<User>) userRepository.findAll();
+        return userRepository.findAll();
     }
 
     @Override
@@ -56,9 +56,8 @@ public class UserServiceImpl implements UserService{
     private boolean validateInfo(User user) {
         if (user.getEmail() != null && user.getPassword() != null && user.getFullname() != null){
             return true;
-        }else{
-            return false;
         }
+        return false;
     }
 
     @Override
