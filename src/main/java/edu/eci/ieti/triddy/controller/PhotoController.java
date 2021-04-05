@@ -57,9 +57,7 @@ public class PhotoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delPhoto(@PathVariable String id){
-        Photo photo = photoService.getPhoto(id);
-        String title = photo.getTitle();
-        photoService.delPhoto(id);
+        String title = photoService.delPhoto(id);
         
         return new ResponseEntity<>(title + " deleted", HttpStatus.OK);
     }

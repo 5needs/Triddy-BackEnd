@@ -12,5 +12,5 @@ public interface PhotoService {
     List<Photo> getPhotos();
     String addPhoto(String owner, MultipartFile file) throws IOException;
     Photo getPhoto(String id);
-    void delPhoto(String id);
+    String delPhoto(String id);
 }

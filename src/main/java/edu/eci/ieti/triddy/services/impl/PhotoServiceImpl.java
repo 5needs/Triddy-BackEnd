@@ -1,10 +1,10 @@
 package edu.eci.ieti.triddy.services.impl;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.BsonBinarySubType;
+import org.bson.Document;
 import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,11 +21,7 @@ public class PhotoServiceImpl implements PhotoService{
     private PhotoRepository photoRepository;
 
     public List<Photo> getPhotos(){
-        List<Photo> photos = new ArrayList<Photo>();
-        for (Photo photo : photoRepository.findAll()){
-            photo.setImage(null);
-            photos.add(photo);
-        }
+        List<Photo> photos = photoRepository.findExcludeImage();
         return photos;
     }
 
@@ -45,7 +41,10 @@ public class PhotoServiceImpl implements PhotoService{
     }
 
     @Override
-    public void delPhoto(String id) {
+    public String delPhoto(String id) {
+        String res = photoRepository.findTitleById(id);
+        Document doc = Document.parse(res);
         photoRepository.deleteById(id);
+        return doc.get("title").toString();
     }
 }
