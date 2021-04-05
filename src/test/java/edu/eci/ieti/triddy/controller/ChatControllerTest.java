@@ -1,6 +1,7 @@
 package edu.eci.ieti.triddy.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Date;
@@ -14,7 +15,7 @@ import edu.eci.ieti.triddy.model.Chat;
 import edu.eci.ieti.triddy.model.Message;
 
 @SpringBootTest
-public class ChatControllerTest {
+class ChatControllerTest {
 
     @Autowired
     ChatController chatController;
@@ -43,7 +44,7 @@ public class ChatControllerTest {
         assertEquals(2, messages.size());
         resp = chatController.getChatById(chat.getId());
         chat = (Chat) resp.getBody();
-        assertEquals(chat.getLastMessage().getContent(), "content 2");
+        assertEquals("content 2", chat.getLastMessage().getContent());
     }
 
     @Test
@@ -64,6 +65,22 @@ public class ChatControllerTest {
         assertEquals(1, chats.size());
     }
 
+    @Test
+    void getNotExistingChat(){
+        ResponseEntity<?> resp= chatController.getChatById("no id");
+        assertFalse(resp.hasBody()); 
+    }
 
+    @Test
+    void addNullChat(){
+        ResponseEntity<?> resp= chatController.addChat(null);
+        assertFalse(resp.hasBody()); 
+    }
+
+    @Test
+    void addNullMessage(){
+        ResponseEntity<?> resp= chatController.addMessageToChat(null);
+        assertFalse(resp.hasBody()); 
+    }
     
 }

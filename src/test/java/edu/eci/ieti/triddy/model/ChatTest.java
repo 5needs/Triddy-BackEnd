@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class ChatTest {
+class ChatTest {
 
     @Test
     void createChat(){
@@ -16,6 +16,9 @@ public class ChatTest {
         Message message = new Message();
         chat = new Chat("user1", "user2", message);
         assertNotNull(chat);
+        String s = String.format("Chat[ id= '%s', user1= '%s', user2= '%s', lastMessage= '%s']"
+        ,chat.getId(),chat.getUser1(),chat.getUser2(), chat.getLastMessage());
+        assertEquals(s, chat.toString());
     }
 
     @Test

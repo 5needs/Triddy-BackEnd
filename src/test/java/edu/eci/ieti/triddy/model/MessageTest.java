@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class MessageTest {
+class MessageTest {
 
     @Test
     void createMessage(){
@@ -17,6 +17,9 @@ public class MessageTest {
         assertNotNull(message);
         message = new Message("user", "content", new Date(), "chatId");
         assertNotNull(message);
+        String s = String.format("Message[ user= '%s', content= '%s', date= '%s', chatId= '%s']"  
+        ,message.getUser(),message.getContent(),message.getDate(),message.getChatId());
+        assertEquals(s, message.toString());
     }
 
     @Test

@@ -13,7 +13,7 @@ import edu.eci.ieti.triddy.model.Chat;
 import edu.eci.ieti.triddy.model.Message;
 
 @SpringBootTest
-public class ChatServiceTest {
+class ChatServiceTest {
 
     @Autowired
     ChatService chatService;
@@ -37,7 +37,7 @@ public class ChatServiceTest {
         List<Message> messages = chatService.getMessagesOfChat(chat.getId());
         assertEquals(2, messages.size());
         chat = chatService.getChatById(chat.getId());
-        assertEquals(chat.getLastMessage().getContent(), "content 2");
+        assertEquals("content 2", chat.getLastMessage().getContent());
     }
 
     @Test

@@ -50,7 +50,6 @@ public class ChatServiceImpl implements ChatService {
         Chat chat = getChatById(message.getChatId());
         chat.setLastMessage(message);
         chatRepository.save(chat);
-        Message newMessage = messageRepository.save(message);
-        return newMessage;
+        return messageRepository.save(message);
     }
 }

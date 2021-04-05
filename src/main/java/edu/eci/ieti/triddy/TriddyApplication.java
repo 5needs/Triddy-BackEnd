@@ -15,9 +15,9 @@ public class TriddyApplication {
 	}
 
 	@Bean
-	public FilterRegistrationBean jwtFilter()
+	public FilterRegistrationBean<JwtFilter> jwtFilter()
 	{
-		final FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+		final FilterRegistrationBean<JwtFilter> registrationBean = new FilterRegistrationBean();
 		registrationBean.setFilter( new JwtFilter() );
 		registrationBean.addUrlPatterns( "/api/*" );
 		return registrationBean;

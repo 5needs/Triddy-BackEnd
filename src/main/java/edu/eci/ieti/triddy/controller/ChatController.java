@@ -24,7 +24,7 @@ public class ChatController {
     private ChatService chatService;
 
     @GetMapping("/{chatId}")
-    public ResponseEntity<?> getChatById(@PathVariable String chatId){
+    public ResponseEntity<Chat> getChatById(@PathVariable String chatId){
         Chat chat = chatService.getChatById(chatId);
         if (chat != null){
             return new ResponseEntity<>(chat, HttpStatus.ACCEPTED);
@@ -35,46 +35,36 @@ public class ChatController {
     }
 
     @GetMapping("/user/{user}")
-    public ResponseEntity<?> getChatsFromUser(@PathVariable String user){
+    public ResponseEntity<List<Chat>> getChatsFromUser(@PathVariable String user){
         List<Chat> chats = chatService.getChatsFromUser(user);
-        if (chats != null){
-            return new ResponseEntity<>(chats, HttpStatus.ACCEPTED);
-        }
-        else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return new ResponseEntity<>(chats, HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/messages/{chatId}")
-    public ResponseEntity<?> getMessagesOfChat(@PathVariable String chatId){
+    public ResponseEntity<List<Message>> getMessagesOfChat(@PathVariable String chatId){
         List<Message> messages = chatService.getMessagesOfChat(chatId);
-        if (messages != null){
-            return new ResponseEntity<>(messages, HttpStatus.ACCEPTED);
-        }
-        else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return new ResponseEntity<>(messages, HttpStatus.ACCEPTED);
     }
 
 
     @PostMapping
-    public ResponseEntity<?> addChat(@RequestBody Chat chat){
-        Chat newChat = chatService.addNewChat(chat);
-        if (newChat != null){
+    public ResponseEntity<Chat> addChat(@RequestBody Chat chat){
+        try{
+            Chat newChat = chatService.addNewChat(chat);
             return new ResponseEntity<>(newChat, HttpStatus.CREATED);
         }
-        else{
+        catch (Exception e){
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
     }
 
     @PostMapping("/messages")
-    public ResponseEntity<?> addMessageToChat(@RequestBody Message message){
-        Message newMessage = chatService.addMessageToChat(message);
-        if (newMessage != null){
+    public ResponseEntity<Message> addMessageToChat(@RequestBody Message message){
+        try{
+            Message newMessage = chatService.addMessageToChat(message);
             return new ResponseEntity<>(newMessage, HttpStatus.CREATED);
         }
-        else{
+        catch (Exception e){
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
     }
