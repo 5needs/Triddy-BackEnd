@@ -21,10 +21,22 @@ class JwtFilterTest {
     JwtFilter jwtFilter = new JwtFilter();
 
     @Test
-    void requesWithoutToken() throws IOException, ServletException{
+    void requesWithEmptyToken() throws IOException, ServletException{
         try {
             MockHttpServletRequest request = new MockHttpServletRequest();
             request.addHeader("authorization", "");
+            MockHttpServletResponse resp = new MockHttpServletResponse();
+            MockFilterChain filterChain = new MockFilterChain();
+            jwtFilter.doFilter(request, resp, filterChain);
+            fail();
+        } catch (Exception e){}
+    }
+
+    @Test
+    void requesWithNullToken() throws IOException, ServletException{
+        try {
+            MockHttpServletRequest request = new MockHttpServletRequest();
+            request.addHeader("authorization", null);
             MockHttpServletResponse resp = new MockHttpServletResponse();
             MockFilterChain filterChain = new MockFilterChain();
             jwtFilter.doFilter(request, resp, filterChain);
