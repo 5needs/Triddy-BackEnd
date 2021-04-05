@@ -30,13 +30,12 @@ public class JwtFilter
         if ( "OPTIONS".equals( request.getMethod() ) )
         {
             response.setStatus( HttpServletResponse.SC_OK );
-
             filterChain.doFilter( servletRequest, response );
         }
         else
         {
 
-            if ( authHeader == null || !authHeader.startsWith( "Bearer " ) )
+            if ( !authHeader.startsWith( "Bearer " ) )
             {
                 throw new ServletException( "Missing or invalid Authorization header" );
             }
