@@ -14,7 +14,7 @@ import edu.eci.ieti.triddy.services.UserService;
 
 @RestController
 @RequestMapping("/api/account")
-public class AccountControler {
+public class AccountController {
     
     @Autowired
     UserService userService;
