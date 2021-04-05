@@ -43,13 +43,38 @@ public class UserServiceTest {
     }
 
     @Test
-    void createNotValidUserTest(){
+    void createRepeatedUserTest(){
         try {
             User user1 = userService.createUser(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null));
             assertNotNull(user1);
             userService.createUser(new User("test@mail.com", "abc789", "Test other", "other U", "other career", null, null));
         } catch (TriddyServiceException e) {
             assertEquals("User already exist",e.getMessage());
+        }
+    }
+
+    @Test 
+    void createUserEmptyEmailTest(){
+        try {
+            userService.createUser(new User(null, "abc123", "Test User", "test U", "test career", null, null));
+        } catch (TriddyServiceException e) {
+            assertEquals("Incomplete or empty user data",e.getMessage());
+        }
+    }
+    @Test 
+    void createUserEmptyPasswordTest(){
+        try {
+            userService.createUser(new User("test@mail.com", null, "Test other", "other U", "other career", null, null));
+        } catch (TriddyServiceException e) {
+            assertEquals("Incomplete or empty user data",e.getMessage());
+        }
+    }
+    @Test 
+    void createUserEmptyNameTest(){
+        try {
+            userService.createUser(new User("test@mail.com", "abc789", null, "other U", "other career", null, null));
+        } catch (TriddyServiceException e) {
+            assertEquals("Incomplete or empty user data",e.getMessage());
         }
     }
 

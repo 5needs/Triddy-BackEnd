@@ -39,14 +39,26 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User createUser(User user) throws TriddyServiceException {
-        User res = userRepository.findByEmail(user.getEmail());
-        if (res == null){
-            user.setPassword(new Sha512Hash(user.getPassword()).toHex());
-            return userRepository.save(user);
+        if(validateInfo(user)){
+            User res = userRepository.findByEmail(user.getEmail());
+            if (res == null){
+                user.setPassword(new Sha512Hash(user.getPassword()).toHex());
+                return userRepository.save(user);
+            }else{
+                throw new TriddyServiceException("User already exist");
+            }
         }else{
-            throw new TriddyServiceException("User already exist");
+            throw new TriddyServiceException("Incomplete or empty user data");
         }
         
+    }
+
+    private boolean validateInfo(User user) {
+        if (user.getEmail() != null && user.getPassword() != null && user.getFullname() != null){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override
