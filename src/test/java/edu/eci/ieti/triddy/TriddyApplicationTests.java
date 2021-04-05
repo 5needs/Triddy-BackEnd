@@ -11,7 +11,7 @@ class TriddyApplicationTests {
 	}
 	
 	@Test
-	public void main() {
+	void main() {
 		TriddyApplication.main(new String[] {});
 	}
 }

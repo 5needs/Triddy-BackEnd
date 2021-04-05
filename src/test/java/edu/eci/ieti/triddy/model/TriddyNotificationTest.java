@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class TriddyNotificationTest {
+class TriddyNotificationTest {
 
     private DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 

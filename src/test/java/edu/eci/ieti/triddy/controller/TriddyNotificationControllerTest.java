@@ -18,7 +18,7 @@ import edu.eci.ieti.triddy.model.User;
 import edu.eci.ieti.triddy.repository.UserRepository;
 
 @SpringBootTest
-public class TriddyNotificationControllerTest {
+class TriddyNotificationControllerTest {
     
     @Autowired
     NotificationController notificationController;
