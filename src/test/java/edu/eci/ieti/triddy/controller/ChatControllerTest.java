@@ -48,18 +48,18 @@ public class ChatControllerTest {
 
     @Test
     void getChatsFromUser(){
-        Message message = new Message("j@mail.com", "content", new Date(), "chatId");
-        Chat chat = new Chat("j@mail.com", "n@mail.com", message);
+        Message message = new Message("j2@mail.com", "content", new Date(), "chatId");
+        Chat chat = new Chat("j2@mail.com", "n2@mail.com", message);
         ResponseEntity<?> resp= chatController.addChat(chat);
         chat = (Chat) resp.getBody();
-        message = new Message("l@mail.com", "content", new Date(), "chatId");
-        chat = new Chat("l@mail.com", "j@mail.com", message);
+        message = new Message("l2@mail.com", "content", new Date(), "chatId");
+        chat = new Chat("l2@mail.com", "j2@mail.com", message);
         resp= chatController.addChat(chat);
         chat = (Chat) resp.getBody();
-        resp = chatController.getChatsFromUser("j@mail.com");
+        resp = chatController.getChatsFromUser("j2@mail.com");
         List<?> chats = (List<?>) resp.getBody();
         assertEquals(2, chats.size());
-        resp = chatController.getChatsFromUser("n@mail.com");
+        resp = chatController.getChatsFromUser("n2@mail.com");
         chats = (List<?>) resp.getBody();
         assertEquals(1, chats.size());
     }
