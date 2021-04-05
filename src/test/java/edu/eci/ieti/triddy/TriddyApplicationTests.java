@@ -10,4 +10,9 @@ class TriddyApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	public void main() {
+		TriddyApplication.main(new String[] {});
+	}
+
 }
