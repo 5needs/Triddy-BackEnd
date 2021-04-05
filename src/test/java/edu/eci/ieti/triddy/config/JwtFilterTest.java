@@ -50,13 +50,15 @@ class JwtFilterTest {
     @Test
     void requestWithTokenInvalid() throws IOException, ServletException{
         try {
+            String jwtToken = Jwts.builder().setSubject( "prueba" ).claim( "roles", "user" ).setIssuedAt( new Date() ).signWith(
+            SignatureAlgorithm.HS256, "badsecretkey" ).compact();
             MockHttpServletRequest request = new MockHttpServletRequest();
-            request.addHeader("authorization", "Bearer " + "token invalido");
+            request.addHeader("authorization", "Bearer " + jwtToken);
             MockHttpServletResponse resp = new MockHttpServletResponse();
             MockFilterChain filterChain = new MockFilterChain();
             jwtFilter.doFilter(request, resp, filterChain);
             fail();
-        } catch (Exception e){ }
+        } catch (Exception e){}
     }
 
     @Test
