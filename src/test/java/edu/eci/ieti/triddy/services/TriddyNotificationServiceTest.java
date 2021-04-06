@@ -1,13 +1,9 @@
 package edu.eci.ieti.triddy.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,8 +11,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import edu.eci.ieti.triddy.exceptions.NotificationNotFoundException;
+import edu.eci.ieti.triddy.exceptions.UserNotFoundException;
 import edu.eci.ieti.triddy.model.Notification;
 import edu.eci.ieti.triddy.model.User;
+import edu.eci.ieti.triddy.repository.NotificationRepository;
 import edu.eci.ieti.triddy.repository.UserRepository;
 
 @SpringBootTest
@@ -28,6 +27,9 @@ class TriddyNotificationServiceTest {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    NotificationRepository notificationRepository;
+
     @BeforeEach
     void setTestUser(){
         userRepository.save(new User("user@test.com", "tester"));
@@ -36,47 +38,69 @@ class TriddyNotificationServiceTest {
     @AfterEach
     void delTestUser(){
         userRepository.deleteByEmail("user@test.com");
+        notificationRepository.deleteAll();
     }
 
     @Test
-    void setNotValidNotificationTest(){
-        int lon = notificationService.getNotifications("other@test.com").size();
-        Notification notification = new Notification("other@test.com", "Type1", new Date(), "A content for test", "https://www.google.com/");
-        Notification response = notificationService.setNotification(notification);    
-        int lon2 = notificationService.getNotifications("other@test.com").size();
-        assertNull(response);
-        assertEquals(lon, lon2);
+    void getNotificationsFailTest(){
+        try {
+            notificationService.getNotifications("other@test.com");
+        } catch (UserNotFoundException e) {
+            assertEquals("Could not find user other@test.com" ,e.getMessage());
+        }
     }
 
     @Test
-    void delByIdNotificationTest(){
-        int lon = notificationService.getNotifications("user@test.com").size();
-        Notification notification = new Notification("user@test.com", "Type1", new Date(), "A content for test", "https://www.google.com/");
-        Notification response = notificationService.setNotification(notification);
-        int lon2 = notificationService.getNotifications("user@test.com").size();
-        assertNotNull(response);
-        assertNotEquals(lon, lon2);
+    void setNotValidNotificationTest(){      
+        try {
+            Notification notification = new Notification("other@test.com", "Type1", new Date(), "A content for test", "https://www.google.com/");
+            notificationService.setNotification(notification);    
+        } catch (UserNotFoundException e) {
+            assertEquals("Could not find user other@test.com" ,e.getMessage());
+        }
+    }
 
-        List<String> ids = new ArrayList<String>();
-        ids.add(response.getId());
-        notificationService.delNotifications(ids);
-        assertEquals(lon, notificationService.getNotifications("user@test.com").size());
+    @Test
+    void delByIdNotificationTest(){      
+        try {
+            Notification notification = new Notification("user@test.com", "Type1", new Date(), "A content for test", "https://www.google.com/");
+            Notification response = notificationService.setNotification(notification);
+            notificationService.delNotification(response.getId());
+        } catch (NotificationNotFoundException | UserNotFoundException e) {
+            fail(e.getMessage());
+        }  
+    }
+
+    @Test
+    void delByIdFailTest(){
+        try {
+            notificationService.delNotification("aaaa11111");
+            fail();
+        } catch (NotificationNotFoundException e) {
+            assertEquals("Could not find notification with id: aaaa11111" ,e.getMessage());
+        }  
     }
 
     @Test
     void delByUserNotificationTest(){
-        int lon = notificationService.getNotifications("user@test.com").size();
-        notificationService.setNotification(new Notification("user@test.com", "Type1", new Date(), "A content for test", "https://www.google.com/"));
-        notificationService.setNotification(new Notification("user@test.com", "Type2", new Date(), "A content for other test", "https://www.google.com/"));
-        int lon2 = notificationService.getNotifications("user@test.com").size();
-
-        assertNotEquals(lon, lon2);
-        notificationService.delNotificationsUser("user@test.com");
-        assertEquals(lon, notificationService.getNotifications("user@test.com").size());
-
-
+        try {
+            notificationService.setNotification(new Notification("user@test.com", "Type1", new Date(), "A content for test", "https://www.google.com/"));
+            notificationService.setNotification(new Notification("user@test.com", "Type2", new Date(), "A content for other test", "https://www.google.com/"));
+            assertEquals(2, notificationService.getNotifications("user@test.com").size());
+            notificationService.delNotificationsUser("user@test.com");
+            assertEquals(0, notificationService.getNotifications("user@test.com").size());
+        } catch (UserNotFoundException e) {
+            fail(e.getMessage());
+        }
     }
 
-    
-    
+    @Test
+    void delByUserNotificationFailTest(){
+        try {
+            notificationService.delNotificationsUser("other@test.com");
+            fail();
+        } catch (UserNotFoundException e) {
+            assertEquals("Could not find user other@test.com" ,e.getMessage());
+        }
+    }
 }
