@@ -1,15 +1,14 @@
-package edu.eci.ieti.triddy.persistence.impl;
+package edu.eci.ieti.triddy.services.impl;
 
 import edu.eci.ieti.triddy.exceptions.ProductException;
 import edu.eci.ieti.triddy.model.Product;
-import edu.eci.ieti.triddy.persistence.ProductPersistence;
 import edu.eci.ieti.triddy.repository.ProductRepository;
+import edu.eci.ieti.triddy.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProductImpl implements ProductPersistence {
+public class ProductImpl implements ProductService {
     @Autowired
     ProductRepository productRepository;
 

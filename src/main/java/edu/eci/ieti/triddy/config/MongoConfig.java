@@ -1,4 +1,4 @@
-package edu.eci.ieti.triddy.config;
+/*package edu.eci.ieti.triddy.config;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,4 +21,4 @@ public class MongoConfig {
     public MongoTemplate mongoTemplate() {
         return new MongoTemplate(mongoClient(), dbname);
     }
-}
+}*/
