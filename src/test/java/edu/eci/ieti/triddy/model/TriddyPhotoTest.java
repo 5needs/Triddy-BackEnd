@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class TriddyPhotoTest {
+class TriddyPhotoTest {
     @Test
     void createPhotoTest(){
         Photo photo = new Photo("Test Photo");

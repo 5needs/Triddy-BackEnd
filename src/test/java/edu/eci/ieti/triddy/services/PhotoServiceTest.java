@@ -21,7 +21,7 @@ import edu.eci.ieti.triddy.repository.PhotoRepository;
 
 
 @SpringBootTest
-public class PhotoServiceTest {
+class PhotoServiceTest {
 
     @Autowired
     private PhotoService photoService;

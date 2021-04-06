@@ -2,6 +2,7 @@ package edu.eci.ieti.triddy.services.impl;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.bson.BsonBinarySubType;
 import org.bson.Document;
@@ -23,8 +24,7 @@ public class PhotoServiceImpl implements PhotoService{
 
     @Override
     public List<Photo> getPhotos(){
-        List<Photo> photos = photoRepository.findExcludeImage();
-        return photos;
+        return photoRepository.findExcludeImage();
     }
 
     @Override
@@ -39,8 +39,9 @@ public class PhotoServiceImpl implements PhotoService{
 
     @Override
     public Photo getPhoto(String id) throws TriddyPhotoException { 
-        if(photoRepository.findById(id).isPresent()){
-            return photoRepository.findById(id).get();
+        Optional<Photo> photo = photoRepository.findById(id);
+        if(photo.isPresent()){
+            return photo.get();
         }else{
             throw new TriddyPhotoException("Photo not found");
         } 
