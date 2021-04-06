@@ -30,9 +30,10 @@ public class PhotoServiceImpl implements PhotoService{
     @Override
     public String addPhoto(String title, MultipartFile file) throws IOException { 
         Photo photo = new Photo(title); 
-        photo.setImage(
-          new Binary(BsonBinarySubType.BINARY, file.getBytes())); 
+        photo.setImage(new Binary(BsonBinarySubType.BINARY, file.getBytes())); 
+        photo.setType(file.getContentType());
         photo = photoRepository.insert(photo); 
+        
         return photo.getId(); 
     }
 

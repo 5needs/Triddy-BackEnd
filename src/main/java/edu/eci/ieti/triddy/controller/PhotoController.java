@@ -28,14 +28,13 @@ public class PhotoController {
     PhotoService photoService;
 
     @GetMapping
-    public List<Photo> getPhotos(){
-        return photoService.getPhotos();
+    public ResponseEntity<List<Photo>> getPhotos(){
+        return new ResponseEntity<>( photoService.getPhotos(),HttpStatus.OK);
     }
 
     @PostMapping
-    public String addPhoto(@RequestParam("title") String title, @RequestParam("image") MultipartFile image) throws IOException {
-        String id = photoService.addPhoto(title, image);
-        return id;
+    public ResponseEntity<String> addPhoto(@RequestParam("title") String title, @RequestParam("image") MultipartFile image) throws IOException {
+        return new ResponseEntity<>(photoService.addPhoto(title, image), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
@@ -44,7 +43,7 @@ public class PhotoController {
             Photo photo = photoService.getPhoto(id);
             HttpHeaders headers = new HttpHeaders();
             byte[] media = photo.getImage().getData();
-            headers.add("Content-Type", "image/png");
+            headers.add("Content-Type", photo.getType());
             return new ResponseEntity<>(media, headers,HttpStatus.OK);
         } catch (TriddyPhotoException e) {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);

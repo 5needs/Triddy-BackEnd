@@ -29,5 +29,8 @@ public class TriddyPhotoTest {
 
         photo.setTitle("example");
         assertEquals("example", photo.getTitle());
+
+        photo.setType("image/png");
+        assertEquals("image/png", photo.getType());
     }
 }

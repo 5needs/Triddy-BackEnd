@@ -19,6 +19,7 @@ import edu.eci.ieti.triddy.exceptions.TriddyPhotoException;
 import edu.eci.ieti.triddy.model.Photo;
 import edu.eci.ieti.triddy.repository.PhotoRepository;
 
+
 @SpringBootTest
 public class PhotoServiceTest {
 

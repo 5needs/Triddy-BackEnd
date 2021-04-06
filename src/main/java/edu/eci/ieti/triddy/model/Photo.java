@@ -13,6 +13,8 @@ public class Photo {
         
     private Binary image;
 
+    private String type;
+
 
     public Photo(String title) {
         this.title = title;
@@ -36,6 +38,14 @@ public class Photo {
 
     public void setImage(Binary image) {
         this.image = image;
+    }
+
+    public void setType(String type){
+        this.type = type;
+    }
+
+    public String getType(){
+        return this.type;
     }
 
 }
