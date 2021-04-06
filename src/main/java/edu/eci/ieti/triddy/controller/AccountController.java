@@ -20,7 +20,7 @@ public class AccountController {
     UserService userService;
 
     @PutMapping("/name")
-    public ResponseEntity<?> updateFullname(@RequestBody User user){
+    public ResponseEntity<String> updateFullname(@RequestBody User user){
         try {
             userService.changeFullname(user);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -29,7 +29,7 @@ public class AccountController {
         }
     }
     @PutMapping("/university")
-    public ResponseEntity<?> updateUniversity(@RequestBody User user){
+    public ResponseEntity<String> updateUniversity(@RequestBody User user){
         try {
             userService.changeUniversity(user);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -39,7 +39,7 @@ public class AccountController {
         
     }
     @PutMapping("/career")
-    public ResponseEntity<?> updateCareer(@RequestBody User user){
+    public ResponseEntity<String> updateCareer(@RequestBody User user){
         try {
             userService.changeCareer(user);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -49,7 +49,7 @@ public class AccountController {
         
     }
     @PutMapping("/picture")
-    public ResponseEntity<?> updatePicture(@RequestBody User user){
+    public ResponseEntity<String> updatePicture(@RequestBody User user){
         try {
             userService.changePicture(user);
             return new ResponseEntity<>(HttpStatus.OK);

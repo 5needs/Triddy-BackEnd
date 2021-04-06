@@ -54,10 +54,11 @@ public class UserServiceImpl implements UserService{
     }
 
     private boolean validateInfo(User user) {
+        boolean value = false;
         if (user.getEmail() != null && user.getPassword() != null && user.getFullname() != null){
-            return true;
+            value = true;
         }
-        return false;
+        return value;
     }
 
     @Override
@@ -78,9 +79,7 @@ public class UserServiceImpl implements UserService{
             userRepository.save(res);
         }else{
             throw new UserNotFoundException(user.getEmail());
-        }
-        
-        
+        }        
     }
 
     @Override

@@ -32,26 +32,26 @@ public class UserController {
     }
 
     @GetMapping("/{email}")
-    public ResponseEntity<?> getUser(@PathVariable String email){
+    public ResponseEntity<User> getUser(@PathVariable String email){
         try {
             return new ResponseEntity<>(userService.getUser(email),HttpStatus.OK);
         } catch (UserNotFoundException e) {
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping
-    public ResponseEntity<?> postUser(@RequestBody User user){
+    public ResponseEntity<User> postUser(@RequestBody User user){
         try {
             return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
         } catch (TriddyServiceException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
     
     }
 
     @DeleteMapping("/{email}")
-    public ResponseEntity<?> delUser(@PathVariable String email){
+    public ResponseEntity<String> delUser(@PathVariable String email){
         try {
             userService.delUser(email);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -61,7 +61,7 @@ public class UserController {
     }
     
     @PutMapping("/{email}/favorites")
-    public ResponseEntity<?> changeFavorites(@PathVariable String email, @RequestBody List<String> favorites){
+    public ResponseEntity<String> changeFavorites(@PathVariable String email, @RequestBody List<String> favorites){
         try {
             userService.changeFavorites(email, favorites);
             return new ResponseEntity<>(HttpStatus.OK);

@@ -37,7 +37,7 @@ class UserControllerTest {
     @Test
     void postUserTest(){
         User u = new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null);
-        ResponseEntity<?> response = userController.postUser(u);
+        ResponseEntity<User> response = userController.postUser(u);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
 
@@ -45,7 +45,7 @@ class UserControllerTest {
     void postNotValidUserTest(){
         User u = new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null);
         userController.postUser(u);
-        ResponseEntity<?> response = userController.postUser(u);
+        ResponseEntity<User> response = userController.postUser(u);
         assertEquals(HttpStatus.NOT_ACCEPTABLE, response.getStatusCode());
     }
 
@@ -53,13 +53,13 @@ class UserControllerTest {
     void getUserTest(){
         User u = new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null);
         userController.postUser(u);
-        ResponseEntity<?> response = userController.getUser("test@mail.com");
+        ResponseEntity<User> response = userController.getUser("test@mail.com");
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
     void getNotValidUserTest(){
-        ResponseEntity<?> response = userController.getUser("test@mail.com");
+        ResponseEntity<User> response = userController.getUser("test@mail.com");
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
     
@@ -67,13 +67,13 @@ class UserControllerTest {
     void delUserTest(){
         User u = new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null);
         userController.postUser(u);
-        ResponseEntity<?> response = userController.delUser("test@mail.com");
+        ResponseEntity<String> response = userController.delUser("test@mail.com");
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
     void delNotValidUserTest(){
-        ResponseEntity<?> response = userController.delUser("test@mail.com");
+        ResponseEntity<String> response = userController.delUser("test@mail.com");
         assertEquals(HttpStatus.NOT_ACCEPTABLE, response.getStatusCode());
     }
     
@@ -83,7 +83,7 @@ class UserControllerTest {
         userController.postUser(u);
         List<String> favorites = new ArrayList<String>();
         favorites.add("aaaa");
-        ResponseEntity<?> response = userController.changeFavorites("test@mail.com", favorites);
+        ResponseEntity<String> response = userController.changeFavorites("test@mail.com", favorites);
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
@@ -91,7 +91,7 @@ class UserControllerTest {
     void changeFavoritesNotValidTest(){
         List<String> favorites = new ArrayList<String>();
         favorites.add("aaaa");
-        ResponseEntity<?> response = userController.changeFavorites("test@mail.com", favorites);
+        ResponseEntity<String> response = userController.changeFavorites("test@mail.com", favorites);
         assertEquals(HttpStatus.NOT_ACCEPTABLE, response.getStatusCode());
     }
 }

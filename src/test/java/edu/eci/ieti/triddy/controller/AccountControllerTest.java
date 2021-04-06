@@ -30,14 +30,14 @@ class AccountControllerTest {
     void changeFullnameTest(){
         userRepository.save(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null));
         User user = new User("test@mail.com", null, "New Name", null, null, null, null);
-        ResponseEntity<?> response = accountController.updateFullname(user);
+        ResponseEntity<String> response = accountController.updateFullname(user);
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
     void notValidChangeFullnameTest(){
         User user = new User("test@mail.com", null, "New Name", null, null, null, null);
-        ResponseEntity<?> response = accountController.updateFullname(user);
+        ResponseEntity<String> response = accountController.updateFullname(user);
         assertEquals(HttpStatus.NOT_ACCEPTABLE, response.getStatusCode());
     }
 
@@ -45,14 +45,14 @@ class AccountControllerTest {
     void changeUniversityTest(){
         userRepository.save(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null));
         User user = new User("test@mail.com", null, null, "Other uni", null, null, null);
-        ResponseEntity<?> response = accountController.updateUniversity(user);
+        ResponseEntity<String> response = accountController.updateUniversity(user);
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
     void notValidChangeUniversityTest(){
         User user = new User("test@mail.com", null, null, "Other uni", null, null, null);
-        ResponseEntity<?> response = accountController.updateUniversity(user);
+        ResponseEntity<String> response = accountController.updateUniversity(user);
         assertEquals(HttpStatus.NOT_ACCEPTABLE, response.getStatusCode());
     }
     
@@ -60,7 +60,7 @@ class AccountControllerTest {
     void changeCareerTest(){
         userRepository.save(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null));
         User user = new User("test@mail.com", null, null, null, "Other career", null, null);
-        ResponseEntity<?> response = accountController.updateCareer(user);
+        ResponseEntity<String> response = accountController.updateCareer(user);
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
