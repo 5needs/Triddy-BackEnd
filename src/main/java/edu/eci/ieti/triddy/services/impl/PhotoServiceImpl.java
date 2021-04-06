@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.eci.ieti.triddy.exceptions.TriddyPhotoException;
 import edu.eci.ieti.triddy.model.Photo;
 import edu.eci.ieti.triddy.repository.PhotoRepository;
 import edu.eci.ieti.triddy.services.PhotoService;
@@ -20,11 +21,13 @@ public class PhotoServiceImpl implements PhotoService{
     @Autowired
     private PhotoRepository photoRepository;
 
+    @Override
     public List<Photo> getPhotos(){
         List<Photo> photos = photoRepository.findExcludeImage();
         return photos;
     }
 
+    @Override
     public String addPhoto(String title, MultipartFile file) throws IOException { 
         Photo photo = new Photo(title); 
         photo.setImage(
@@ -33,18 +36,32 @@ public class PhotoServiceImpl implements PhotoService{
         return photo.getId(); 
     }
 
-    public Photo getPhoto(String id) { 
+    @Override
+    public Photo getPhoto(String id) throws TriddyPhotoException { 
         if(photoRepository.findById(id).isPresent()){
             return photoRepository.findById(id).get();
-        }
-        return null; 
+        }else{
+            throw new TriddyPhotoException("Photo not found");
+        } 
     }
 
     @Override
-    public String delPhoto(String id) {
-        String res = photoRepository.findTitleById(id);
-        Document doc = Document.parse(res);
+    public String delPhoto(String id) throws TriddyPhotoException {
+        String res = getPhotoTitle(id);
         photoRepository.deleteById(id);
-        return doc.get("title").toString();
+        return res;
+    }
+
+    @Override
+    public String getPhotoTitle(String id) throws TriddyPhotoException {
+        String res = photoRepository.findTitleById(id);
+        if (res != null){
+            Document doc = Document.parse(res);
+            photoRepository.deleteById(id);
+            return doc.get("title").toString();
+        }else{
+            throw new TriddyPhotoException("Photo not found");
+        }
+        
     }
 }

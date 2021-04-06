@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.eci.ieti.triddy.exceptions.TriddyPhotoException;
 import edu.eci.ieti.triddy.model.Photo;
 import edu.eci.ieti.triddy.services.PhotoService;
 
@@ -39,27 +40,36 @@ public class PhotoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getPhotoImage(@PathVariable String id) {
-        Photo photo = photoService.getPhoto(id);
-        HttpHeaders headers = new HttpHeaders();
-        byte[] media = photo.getImage().getData();
-        headers.add("Content-Type", "image/png");
-        ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(media, headers,HttpStatus.OK);
-
-        return responseEntity;
+        try {
+            Photo photo = photoService.getPhoto(id);
+            HttpHeaders headers = new HttpHeaders();
+            byte[] media = photo.getImage().getData();
+            headers.add("Content-Type", "image/png");
+            return new ResponseEntity<>(media, headers,HttpStatus.OK);
+        } catch (TriddyPhotoException e) {
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
     }
     @GetMapping("/{id}/title")
     public ResponseEntity<String> getPhotoTitle(@PathVariable String id) {
-        Photo photo = photoService.getPhoto(id);
-        String title = photo.getTitle();
-
-        return new ResponseEntity<>(title ,HttpStatus.OK);
+        try {
+            String title = photoService.getPhotoTitle(id);
+            return new ResponseEntity<>(title, HttpStatus.OK);
+        } catch (TriddyPhotoException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delPhoto(@PathVariable String id){
-        String title = photoService.delPhoto(id);
+        try {
+            String title = photoService.delPhoto(id);
+            return new ResponseEntity<>(title + " deleted", HttpStatus.OK);
+        } catch (TriddyPhotoException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
         
-        return new ResponseEntity<>(title + " deleted", HttpStatus.OK);
     }
     
 }
