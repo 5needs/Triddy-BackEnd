@@ -38,7 +38,7 @@ public class PhotoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getPhotoImage(@PathVariable String id) {
+    public ResponseEntity<byte[]> getPhotoImage(@PathVariable String id) {
         try {
             Photo photo = photoService.getPhoto(id);
             HttpHeaders headers = new HttpHeaders();
@@ -46,7 +46,7 @@ public class PhotoController {
             headers.add("Content-Type", photo.getType());
             return new ResponseEntity<>(media, headers,HttpStatus.OK);
         } catch (TriddyPhotoException e) {
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
     @GetMapping("/{id}/title")

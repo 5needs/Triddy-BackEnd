@@ -59,7 +59,7 @@ class PhotoControllerTest {
 
     @Test
     void getPhotoImageFailTest(){
-        ResponseEntity<?> response = photoController.getPhotoImage("aaa111");
+        ResponseEntity<byte[]> response = photoController.getPhotoImage("aaa111");
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
