@@ -42,10 +42,6 @@ public class University {
         return idUniversity;
     }
 
-    public void setIdUniversity(String idUniversity) {
-        this.idUniversity = idUniversity;
-    }
-
     @Override
     public String toString() {
         return String.format("University[ idUniversity='%s', discount='%s', students='%s']",idUniversity,discount,students);

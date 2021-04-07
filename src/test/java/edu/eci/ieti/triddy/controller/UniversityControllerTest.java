@@ -42,6 +42,12 @@ public class UniversityControllerTest {
     }
 
     @Test
+    void shouldNotGetStudentsByUniversity(){
+        ResponseEntity<?> response = universityController.getStudentsByUniversity("ECIfgsdfasd");
+        assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
+    }
+
+    @Test
     void updateStudentByUniversity(){
         universityService.addUniversity(new University("ECI"),"12237");
         ResponseEntity<?> response = universityController.updateStudentByUniversity("ECI","12237");
@@ -49,10 +55,23 @@ public class UniversityControllerTest {
     }
 
     @Test
+    void shouldNotPpdateStudentByUniversity(){
+        universityService.addUniversity(new University("ECI"),"12237");
+        ResponseEntity<?> response = universityController.updateStudentByUniversity("ECI456745674567","12237");
+        assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
+    }
+
+    @Test
     void deleteUniversityById(){
         universityService.addUniversity(new University("ECI"),"12237");
         ResponseEntity<?> response = universityController.deleteUniversityById("ECI");
         assertEquals(HttpStatus.ACCEPTED, response.getStatusCode());
+    }
+
+    @Test
+    void shouldNotDeleteUniversityById(){
+        ResponseEntity<?> response = universityController.deleteUniversityById("ECI6745674567");
+        assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
     }
 
 }
