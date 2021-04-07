@@ -17,6 +17,6 @@ public class ProductController {
     
     @PostMapping(value = "/create")
     public ResponseEntity<String> createProduct(@RequestBody Product product) throws ProductException {
-        return new ResponseEntity<>(productService.createProduct(product), HttpStatus.CREATED);
+        return new ResponseEntity<String>(productService.createProduct(product), HttpStatus.CREATED);
     }
 }
