@@ -27,7 +27,6 @@ public class UniversityController {
             ArrayList<String> students = universityService.getStudentsByUniversity((idUniversity));
             return new ResponseEntity<>(students,HttpStatus.ACCEPTED);
         } catch (TriddyServiceException e) {
-            Logger.getLogger(UniversityController.class.getName()).log(Level.SEVERE, e.getMessage(), e);
             return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
         }
     }
@@ -44,7 +43,6 @@ public class UniversityController {
             universityService.updateStudentByUniversity(idUniversity,idClient);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch (TriddyServiceException e) {
-            Logger.getLogger(UniversityController.class.getName()).log(Level.SEVERE, e.getMessage(), e);
             return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
         }
     }
@@ -55,7 +53,6 @@ public class UniversityController {
             universityService.deleteUniversityById(idUniversity);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch (TriddyServiceException e) {
-            Logger.getLogger(UniversityController.class.getName()).log(Level.SEVERE, e.getMessage(), e);
             return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
         }
     }
