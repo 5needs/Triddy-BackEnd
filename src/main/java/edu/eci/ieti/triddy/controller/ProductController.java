@@ -16,8 +16,12 @@ public class ProductController {
     ProductService productService;
     
     @PostMapping(value = "/create")
-    public ResponseEntity<String> createProduct(@RequestBody Product product) throws ProductException {
-        String response = productService.createProduct(product);
-        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+    public Object createProduct(@RequestBody Product product) {
+        try {
+            String response = productService.createProduct(product);
+            return new ResponseEntity<String>(response, HttpStatus.CREATED);
+        } catch (ProductException e) {
+            return new ProductException(ProductException.CREATE_PRODUCT_ERROR);
+        }
     }
 }
