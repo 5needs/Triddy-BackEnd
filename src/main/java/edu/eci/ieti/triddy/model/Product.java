@@ -1,8 +1,10 @@
 package edu.eci.ieti.triddy.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.UUID;
 
+@Document(collection = "Product")
 public class Product {
     @Id
     private String id;
