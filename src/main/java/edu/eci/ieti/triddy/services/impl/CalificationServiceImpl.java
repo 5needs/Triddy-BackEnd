@@ -31,7 +31,7 @@ public class CalificationServiceImpl implements CalificationService {
     public Double getProductStatus(String product){
         Double res = 2.5;
         List<Calification> califications = calificationRepository.findByProduct(product);
-        if (califications.size() > 0){
+        if (!califications.isEmpty()){
             Double sum = 0.0;
             for (int i = 0; i < califications.size(); i++){
                 sum+= califications.get(i).getProducttatus();
@@ -44,7 +44,7 @@ public class CalificationServiceImpl implements CalificationService {
     public Double getProductCharacteristic(String product){
         Double res = 2.5;
         List<Calification> califications = calificationRepository.findByProduct(product);
-        if (califications.size() > 0){
+        if (!califications.isEmpty()){
             Double sum = 0.0;
             for (int i = 0; i < califications.size(); i++){
                 sum+= califications.get(i).getProductCharacteristics();
@@ -57,7 +57,7 @@ public class CalificationServiceImpl implements CalificationService {
     public Double getUserCalification(String user){
         Double res = 2.5;
         List<Calification> califications = calificationRepository.findByUser(user);
-        if (califications.size() > 0){
+        if (!califications.isEmpty()){
             Double sum = 0.0;
             for (int i = 0; i < califications.size(); i++){
                 sum+= califications.get(i).getUserCalification();
@@ -68,8 +68,7 @@ public class CalificationServiceImpl implements CalificationService {
     }
 
     public Calification addCalification(Calification calification){
-        Calification newCalification = calificationRepository.save(calification);
-        return newCalification;
+        return calificationRepository.save(calification);
     }
     
 }

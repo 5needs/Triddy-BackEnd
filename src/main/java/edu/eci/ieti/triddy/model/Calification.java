@@ -48,7 +48,7 @@ public class Calification {
 
     public void setProductStatus(Double productStatus) {
         this.productStatus = productStatus;
-    };
+    }
 
     public Double getProductCharacteristics() {
         return this.productCharacteristics;
