@@ -4,7 +4,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.UUID;
 
-@Document(collection = "Product")
 public class Product {
     @Id
     private String id;
@@ -61,4 +60,5 @@ public class Product {
     public void setAvailable(Boolean available) {
         this.available = available;
     }
+
 }
