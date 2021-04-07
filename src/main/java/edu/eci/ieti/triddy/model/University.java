@@ -1,7 +1,6 @@
 package edu.eci.ieti.triddy.model;
 
 import org.springframework.data.annotation.Id;
-
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -49,6 +48,6 @@ public class University {
 
     @Override
     public String toString() {
-        return String.format("University[ idUniversity='%s', discount='%s', semester='%s']",idUniversity,discount,students);
+        return String.format("University[ idUniversity='%s', discount='%s', students='%s']",idUniversity,discount,students);
     }
 }
