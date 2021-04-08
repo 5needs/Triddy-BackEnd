@@ -19,4 +19,10 @@ class ProductControllerTest {
         ResponseEntity<String> response = productController.createProduct(product);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
+    @Test
+    void shouldException() {
+        Product product = new Product(null,null,"nombre");
+        ResponseEntity<String> response = productController.createProduct(product);
+        assertEquals(HttpStatus.NOT_ACCEPTABLE, response.getStatusCode());
+    }
 }

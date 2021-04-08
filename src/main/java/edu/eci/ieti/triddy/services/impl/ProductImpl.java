@@ -14,8 +14,9 @@ public class ProductImpl implements ProductService {
 
     @Override
     public String createProduct(Product product) throws ProductException {
-        if(productRepository.existsById(product.getId())) {
-           throw new ProductException(ProductException.CREATE_PRODUCT_ERROR);
+
+        if(product.getName() == null || product.getDescription() == null) {
+           throw new ProductException("There was an error creating the product");
         }
         productRepository.save(product);
         return "successfully created";

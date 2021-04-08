@@ -15,6 +15,7 @@ class ProductTest {
         assertEquals(true, product.getAvailable());
     }
 
+    @Test
     void ProductSetMethod() {
         Product product = new Product(null,"description","nombre");
         product.setAvailable(false);
@@ -26,7 +27,8 @@ class ProductTest {
         product.setName("nombre2");
         assertEquals("nombre2",product.getName());
 
-        product.setPictures(new String[]{"hola"});
-        assertEquals(new String[]{"hola"}, product.getPictures());
+        String[] list = {"hola"};
+        product.setPictures(list);
+        assertEquals(list, product.getPictures());
     }
 }

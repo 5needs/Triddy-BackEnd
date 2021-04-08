@@ -13,12 +13,8 @@ class ProductServiceTest {
 
     @Test
     void createProduct() throws ProductException {
-        try {
-            Product product = new Product(null,"description","nombre");
-            String string = productService.createProduct(product);
-            assertEquals("successfully created",string);
-        } catch (ProductException e) {
-            throw new ProductException(ProductException.CREATE_PRODUCT_ERROR);
-        }
+        Product product = new Product(null,"description","nombre");
+        String string = productService.createProduct(product);
+        assertEquals("successfully created", string);
     }
 }
