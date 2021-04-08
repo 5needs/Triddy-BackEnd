@@ -9,7 +9,7 @@ public class ReserveTest {
 
     @Test
     void createReserve(){
-        Reclaim reserve = new Reclaim("123","12","789","2021-04-01T19:52:00Z","2021-05-01T19:52:00Z");
+        Reserve reserve = new Reserve("123","12","789","2021-04-01T19:52:00Z","2021-05-01T19:52:00Z");
         assertEquals("123", reserve.getIdReserve());
         assertEquals("12", reserve.getIdClient());
         assertEquals("789",reserve.getIdProduct());
@@ -19,8 +19,8 @@ public class ReserveTest {
 
     @Test
     void validToStringMethod(){
-        Reclaim reserve = new Reclaim("123","12","789","2021-04-01T19:52:00Z","2021-05-01T19:52:00Z");
-        String expected = String.format("Reclaim[ idReserve='%s', idClient='%s', idProduct='%s', startDate='%s', endDate='%s']", "123","12","789","2021-04-01T19:52:00Z","2021-05-01T19:52:00Z");
+        Reserve reserve = new Reserve("123","12","789","2021-04-01T19:52:00Z","2021-05-01T19:52:00Z");
+        String expected = String.format("Reserve[ idReserve='%s', idClient='%s', idProduct='%s', startDate='%s', endDate='%s']", "123","12","789","2021-04-01T19:52:00Z","2021-05-01T19:52:00Z");
         assertEquals(expected, reserve.toString());
     }
 }
