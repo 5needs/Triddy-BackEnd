@@ -26,7 +26,7 @@ public class ReserveController {
             List<Reserve> reserve = reserveService.getReserveByIdClient(idClient);
             return new ResponseEntity<>(reserve,HttpStatus.ACCEPTED);
         } catch (TriddyServiceException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
         }
     }
 

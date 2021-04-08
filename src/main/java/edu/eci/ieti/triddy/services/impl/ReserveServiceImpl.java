@@ -34,10 +34,11 @@ public class ReserveServiceImpl implements ReserveService {
     @Override
     public List<Reserve> getReserveByIdClient(String idClient) throws TriddyServiceException {
         List<Reserve> reserve = reserveRepository.findByIdClient(idClient);
-        if (reserve != null){
+        System.out.println(reserve);
+        if (!reserve.isEmpty()){
             return reserve;
         }else{
-            throw new TriddyServiceException("Reserve with Id Client: "+idClient+" is not registered");
+            throw new TriddyServiceException("Reserves with Id Client: "+idClient+" is not registered");
         }
     }
 

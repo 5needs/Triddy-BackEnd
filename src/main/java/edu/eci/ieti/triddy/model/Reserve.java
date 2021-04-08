@@ -36,24 +36,12 @@ public class Reserve {
         return idProduct;
     }
 
-    public void setIdProduct(String idProduct) {
-        this.idProduct = idProduct;
-    }
-
     public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
     public String getEndDate() {
         return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
     }
 
     @Override
