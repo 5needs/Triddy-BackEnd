@@ -1,8 +1,8 @@
 package edu.eci.ieti.triddy.controller;
 
-import edu.eci.ieti.triddy.model.Reserve;
-import edu.eci.ieti.triddy.repository.ReserveRepository;
-import edu.eci.ieti.triddy.services.ReserveService;
+import edu.eci.ieti.triddy.model.Reclaim;
+import edu.eci.ieti.triddy.repository.ReclaimRepository;
+import edu.eci.ieti.triddy.services.ReclaimService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +15,13 @@ import org.springframework.http.HttpStatus;
 public class ReserveControllerTest {
 
     @Autowired
-    ReserveService reserveService;
+    ReclaimService reserveService;
 
     @Autowired
-    ReserveRepository reserveRepository;
+    ReclaimRepository reserveRepository;
 
     @Autowired
-    ReserveController reserveController;
+    ReclaimController reserveController;
 
     @AfterEach
     void deleteReserves(){
@@ -36,7 +36,7 @@ public class ReserveControllerTest {
 
     @Test
     void getReserveByIdClient(){
-        reserveService.addReserve(new Reserve("123","12","789","2021-04-01T19:52:00Z","2021-05-01T19:52:00Z"));
+        reserveService.addReserve(new Reclaim("123","12","789","2021-04-01T19:52:00Z","2021-05-01T19:52:00Z"));
         ResponseEntity<?> response = reserveController.getReserveByIdClient("12");
         assertEquals(HttpStatus.ACCEPTED, response.getStatusCode());
     }
@@ -49,7 +49,7 @@ public class ReserveControllerTest {
 
     @Test
     void getReserveByIdReserve(){
-        reserveService.addReserve(new Reserve("123","12","789","2021-04-01T19:52:00Z","2021-05-01T19:52:00Z"));
+        reserveService.addReserve(new Reclaim("123","12","789","2021-04-01T19:52:00Z","2021-05-01T19:52:00Z"));
         ResponseEntity<?> response = reserveController.getReserveByIdReserve("123");
         assertEquals(HttpStatus.ACCEPTED, response.getStatusCode());
     }
@@ -62,7 +62,7 @@ public class ReserveControllerTest {
 
     @Test
     void deleteReserveByIdReserve(){
-        reserveService.addReserve(new Reserve("123","12","789","2021-04-01T19:52:00Z","2021-05-01T19:52:00Z"));
+        reserveService.addReserve(new Reclaim("123","12","789","2021-04-01T19:52:00Z","2021-05-01T19:52:00Z"));
         ResponseEntity<?> response = reserveController.deleteReserveByIdReserve("123");
         assertEquals(HttpStatus.ACCEPTED, response.getStatusCode());
     }
