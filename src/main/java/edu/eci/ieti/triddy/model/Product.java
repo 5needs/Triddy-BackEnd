@@ -6,6 +6,7 @@ import java.util.UUID;
 public class Product {
     @Id
     private String id;
+    private String userId;
     private String[] pictures;
     private String name;
     private String description;
@@ -13,6 +14,7 @@ public class Product {
 
     public Product(String[] pictures, String description, String name) {
         setId();
+        setUserId();
         this.pictures = pictures;
         this.description = description;
         this.name = name;
@@ -26,6 +28,14 @@ public class Product {
     public void setId() {
         UUID uuid = UUID.randomUUID();
         this.id = uuid.toString();
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId() {
+        this.userId = "123";
     }
 
     public String[] getPictures() {

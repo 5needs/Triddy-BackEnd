@@ -13,6 +13,7 @@ class ProductTest {
         assertEquals("description", product.getDescription());
         assertEquals(null, product.getPictures());
         assertEquals(true, product.getAvailable());
+        assertEquals("123", product.getUserId());
     }
 
     @Test
