@@ -16,7 +16,7 @@ public class RentController {
     RentService rentService;
 
     @PostMapping(value = "/create")
-    public ResponseEntity<?> createRent(@RequestBody Rent rent) {
+    public ResponseEntity<String> createRent(@RequestBody Rent rent) {
         try {
             rentService.createRent(rent);
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -26,7 +26,7 @@ public class RentController {
     }
 
     @DeleteMapping(value = "/delete/{id}")
-    public ResponseEntity<?> deleteRent(@PathVariable String id) {
+    public ResponseEntity<String> deleteRent(@PathVariable String id) {
         try {
             rentService.deleteRent(id);
             return new ResponseEntity<>(HttpStatus.OK);

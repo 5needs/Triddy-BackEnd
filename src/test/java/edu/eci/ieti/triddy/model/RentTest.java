@@ -5,7 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class RentTest {
+class RentTest {
     @Test
     void CreateRent() {
         Rent rent = new Rent("dateInitial", "dateFinal", "status");

@@ -1,5 +1,4 @@
-package edu.eci.ieti.triddy.services.Impl;
-
+package edu.eci.ieti.triddy.services.impl;
 import edu.eci.ieti.triddy.exceptions.RentException;
 import edu.eci.ieti.triddy.model.Rent;
 import edu.eci.ieti.triddy.repository.RentRepository;
@@ -17,7 +16,6 @@ public class RentImpl implements RentService {
         if(rent.getInitialDate() == null || rent.getFinalDate() == null || rent.getStatus() == null) {
             throw new RentException("error when creating the rent");
         } else {
-            System.out.println(rent.getId());
             rentRepository.save(rent);
         }
     }
