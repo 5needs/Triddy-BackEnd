@@ -1,78 +1,86 @@
 package edu.eci.ieti.triddy.services;
 
-import edu.eci.ieti.triddy.controller.UniversityController;
+import edu.eci.ieti.triddy.controller.ReclaimController;
 import edu.eci.ieti.triddy.exceptions.TriddyServiceException;
-import edu.eci.ieti.triddy.model.University;
-import edu.eci.ieti.triddy.repository.UniversityRepository;
+import edu.eci.ieti.triddy.model.Reclaim;
+import edu.eci.ieti.triddy.repository.ReclaimRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class UniversityServiceImplTest {
 
     @Autowired
-    UniversityService universityService;
+    ReclaimService reclaimService;
 
     @Autowired
-    UniversityRepository universityRepository;
+    ReclaimRepository reclaimRepository;
 
     @Autowired
-    UniversityController universityController;
+    ReclaimController reclaimController;
 
     @AfterEach
-    void deletePayments(){
-        universityRepository.deleteAll();
+    void deleteReclaims(){
+        reclaimRepository.deleteAll();
     }
 
     @Test
-    public void addUniversity() {
-        University university = new University("Javeriana");
-        universityService.addUniversity(university, "4321");
-        University university2 = universityRepository.findByIdUniversity("Javeriana");
-        assertNotNull(university2.getIdUniversity());
+    public void addReclaim() {
+        Reclaim reclaim = new Reclaim("12","13","14","robo","muy malo todo");
+        reclaimService.addReclaim(reclaim);
+        Reclaim reclaim2 = reclaimRepository.findByIdReclaim("12");
+        assertNotNull(reclaim2.getIdReclaim());
     }
 
     @Test
-    public void getStudentsByUniversity() {
+    public void getReclaimById() {
         try {
-            University university = new University("Javeriana");
-            universityService.addUniversity(university, "4321");
-            ArrayList<String> students = universityService.getStudentsByUniversity("Javeriana");
-            assertTrue(students.contains("4321"));
+            Reclaim reclaim = new Reclaim("12","13","14","robo","muy malo todo");
+            reclaimService.addReclaim(reclaim);
+            Reclaim reclaim2 = reclaimService.getReclaimById("12");
+            assertTrue(reclaim2.getIdReclaim().contains("12"));
         }catch (TriddyServiceException e) {
-            assertTrue(e.getMessage().contains("University with Id:"));
+            assertTrue(e.getMessage().contains("Reclaim with Id:"));
         }
     }
 
     @Test
-    public void updateStudentByUniversity() {
+    public void getReclaimByIdClient() {
         try {
-            University university = new University("Javeriana");
-            universityService.addUniversity(university, "4321");
-            universityService.updateStudentByUniversity("Javeriana","4321");
-            ArrayList<String> students = universityService.getStudentsByUniversity("Javeriana");
-            assertFalse(students.contains("4321"));
+            Reclaim reclaim = new Reclaim("12","13","14","robo","muy malo todo");
+            reclaimService.addReclaim(reclaim);
+            Reclaim reclaim2 = reclaimService.getReclaimByIdClient("13");
+            assertTrue(reclaim2.getIdClient().contains("13"));
         }catch (TriddyServiceException e) {
-            assertTrue(e.getMessage().contains("University with Id:"));
+            assertTrue(e.getMessage().contains("Reclaim with Id:"));
         }
     }
 
     @Test
-    public void deleteUniversityById() {
+    public void getReclaimByIdOferent() {
         try {
-            University university = new University("Javeriana");
-            universityService.addUniversity(university, "4321");
-            universityService.deleteUniversityById("Javeriana");
-            University university2 = universityRepository.findByIdUniversity("Javeriana");
-            assertNull(university2);
+            Reclaim reclaim = new Reclaim("12","13","14","robo","muy malo todo");
+            reclaimService.addReclaim(reclaim);
+            Reclaim reclaim2 = reclaimService.getReclaimByIdOferent("14");
+            assertTrue(reclaim2.getIdOferent().contains("14"));
         }catch (TriddyServiceException e) {
-            assertTrue(e.getMessage().contains("Payment with Id:"));
+            assertTrue(e.getMessage().contains("Reclaim with Id:"));
+        }
+    }
+
+    @Test
+    public void deleteReclaimByIidReclaim() {
+        try {
+            Reclaim reclaim = new Reclaim("12","13","14","robo","muy malo todo");
+            reclaimService.addReclaim(reclaim);
+            reclaimService.deleteReclaimByIidReclaim("12");
+            Reclaim reclaim2 = reclaimService.getReclaimById("12");
+        }catch (TriddyServiceException e) {
+            System.out.println(e.getMessage());
+            assertTrue(e.getMessage().contains("Reclaim with Id : 12 is not registered"));
         }
     }
 

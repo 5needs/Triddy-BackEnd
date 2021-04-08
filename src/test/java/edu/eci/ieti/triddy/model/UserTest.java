@@ -10,26 +10,18 @@ public class UserTest {
 
     @Test
     void createPayment(){
-        University university = new University("Andes");
-        assertEquals("Andes", university.getIdUniversity());
-        assertEquals(0, university.getDiscount());
-        assertTrue(university.getStudents().isEmpty());
-    }
-
-    @Test
-    void validBasicSetMethods(){
-        University university = new University("Javeriana");
-        university.setDiscount("Javeriana");
-        assertEquals(1000, university.getDiscount());
-        university.setStudents("63546345");
-        assertTrue(university.getStudents().contains("63546345"));
+        Reclaim reclaim = new Reclaim("12","13","14","robo","muy malo todo");
+        assertEquals("12", reclaim.getIdReclaim());
+        assertEquals("13", reclaim.getIdClient());
+        assertEquals("14",reclaim.getIdOferent());
+        assertEquals("robo", reclaim.getCategory());
+        assertEquals("muy malo todo",reclaim.getComment());
     }
 
     @Test
     void validToStringMethod(){
-        University university = new University("Sabana");
-        String expected = String.format("University[ idUniversity='%s', discount='%s', students='%s']", "Sabana", "0", "[]");
-        assertEquals(expected, university.toString());
+        Reclaim reclaim = new Reclaim("121","132","143","robo","muy malo todo");
+        String expected = String.format("Reclaim[ idReclaim='%s', idClient='%s', idOferent='%s', category='%s', comment='%s']", "121", "132", "143", "robo","muy malo todo");
+        assertEquals(expected, reclaim.toString());
     }
-
 }
