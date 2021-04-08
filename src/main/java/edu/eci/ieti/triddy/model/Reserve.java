@@ -28,10 +28,6 @@ public class Reserve {
         return idClient;
     }
 
-    public void setIdClient(String idClient) {
-        this.idClient = idClient;
-    }
-
     public String getIdProduct() {
         return idProduct;
     }
