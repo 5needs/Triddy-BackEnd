@@ -1,9 +1,6 @@
 package edu.eci.ieti.triddy.model;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import java.util.List;
 
 public class Payment {
 

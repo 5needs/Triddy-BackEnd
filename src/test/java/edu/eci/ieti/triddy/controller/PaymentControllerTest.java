@@ -39,10 +39,22 @@ public class PaymentControllerTest {
     }
 
     @Test
+    void shouldNotGetPaymentById(){
+        ResponseEntity<?> response = paymentController.getPaymentById("02-04-2021 08:40:30 +124534585678578978907890789067834");
+        assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
+    }
+
+    @Test
     void deletePaymentById(){
         paymentRepository.save(new Payment("02-04-2021 08:40:30 +1245345856354634563456678567834",423000.0,"54321","1234"));
         ResponseEntity<?> response = paymentController.deletePaymentById("02-04-2021 08:40:30 +1245345856354634563456678567834");
         assertEquals(HttpStatus.ACCEPTED, response.getStatusCode());
+    }
+
+    @Test
+    void shouldNotDeletePaymentById(){
+        ResponseEntity<?> response = paymentController.deletePaymentById("02-04-2021 08:40:30 +12453458563csdsadadsad54634563456678567834");
+        assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
     }
 
 
