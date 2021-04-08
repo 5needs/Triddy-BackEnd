@@ -2,14 +2,11 @@ package edu.eci.ieti.triddy.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -59,6 +56,9 @@ class DiscountControllerTest {
         resp= discountController.productHaveActiveDiscount("product1");
         Boolean have = (Boolean) resp.getBody();
         assertTrue(have);
+        resp= discountController.productHaveActiveDiscount("product10");
+        have = (Boolean) resp.getBody();
+        assertFalse(have);
         resp= discountController.getProductActiveDiscounts("product1");
         discounts = (List<?>) resp.getBody();
         assertEquals(2, discounts.size());

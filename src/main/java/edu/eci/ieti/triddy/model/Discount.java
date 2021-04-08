@@ -3,10 +3,10 @@ package edu.eci.ieti.triddy.model;
 import java.util.Date;
 
 public class Discount {
-    public String product;
-    public Date start;
-    public Date end;
-    public String type;
+    private String product;
+    private Date start;
+    private Date end;
+    private String type;
 
     public Discount(String product, Date start, Date end, String type){
         this.product = product;
@@ -16,7 +16,7 @@ public class Discount {
     }
 
     public Discount(){
-        
+
     }
 
     public String getProduct() {
