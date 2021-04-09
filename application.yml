@@ -1,0 +1,4 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://triddy:123@cluster0.ey557.mongodb.net/triddy?retryWrites=true&w=majority
