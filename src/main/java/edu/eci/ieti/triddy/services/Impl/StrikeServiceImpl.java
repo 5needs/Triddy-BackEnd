@@ -1,4 +1,4 @@
-package edu.eci.ieti.triddy.services.Impl;
+package edu.eci.ieti.triddy.services.impl;
 
 import edu.eci.ieti.triddy.exceptions.TriddyServiceException;
 import edu.eci.ieti.triddy.model.UserStrike;
