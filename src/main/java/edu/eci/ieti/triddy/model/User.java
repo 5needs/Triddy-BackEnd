@@ -15,6 +15,11 @@ public class User {
     private String career;
     private List<String> favorites;
 
+    public User()
+    {
+     super();
+    }
+
     public User(String email, String password, String fullname, String university, String career, String picture, List<String> favorites) {
         this.email = email;
         this.password = password;
