@@ -94,7 +94,6 @@ public class StrikeServiceTest {
 
     @Test
     public void addStrikeToUserFailed() {
-        UserStrike userStrike = new UserStrike("test@gmail.com", new ArrayList<>(), true);
         List<String> temp = new ArrayList<>();
         temp.add("testing");
         try {
@@ -118,7 +117,6 @@ public class StrikeServiceTest {
 
     @Test
     public void changeActiveStrikeFailed() {
-        UserStrike userStrike = new UserStrike("test@gmail.com", new ArrayList<>(),true);
         try {
             strikeService.changeActiveStrike("test@gmail.com");
         } catch (TriddyServiceException e) {
@@ -143,7 +141,6 @@ public class StrikeServiceTest {
 
     @Test
     public void removeStrikeToUserFailed() {
-        UserStrike userStrike = new UserStrike("test@gmail.com", new ArrayList<>(),true);
         try {
             strikeService.removeStrikeToUser("test@gmail.com",0);
         } catch (TriddyServiceException e) {

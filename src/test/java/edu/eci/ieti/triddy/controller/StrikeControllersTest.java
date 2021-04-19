@@ -9,15 +9,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class StrikeControllersTest {
 
@@ -54,7 +50,6 @@ class StrikeControllersTest {
 
     @Test
     public void getUserStrikeFailed(){
-        UserStrike userStrike = new UserStrike("test@gmail.com", new ArrayList<>(),true);
         ResponseEntity<UserStrike> responseEntity  =strikeControllers.getUserStrike("test@gmail.com");
         assertEquals(HttpStatus.NOT_FOUND,responseEntity.getStatusCode());
     }
@@ -62,7 +57,7 @@ class StrikeControllersTest {
     @Test
     public void addUserStrike(){
         UserStrike userStrike = new UserStrike("test@gmail.com", new ArrayList<>(),true);
-        ResponseEntity<String> responseEntity  =strikeControllers.addUserStrike("test@gmail.com");
+        ResponseEntity<String> responseEntity  =strikeControllers.addUserStrike(userStrike.getIdUser());
         assertEquals(HttpStatus.ACCEPTED,responseEntity.getStatusCode());
     }
 
@@ -87,7 +82,6 @@ class StrikeControllersTest {
 
     @Test
     public void addStrikeToUserFailed(){
-        UserStrike userStrike = new UserStrike("test@gmail.com", new ArrayList<>(),true);
         List<String> temp = new ArrayList<>();
         temp.add("testing");
         UserStrike userStrike1 = new UserStrike("test@gmail.com", temp,true);
@@ -105,7 +99,6 @@ class StrikeControllersTest {
 
     @Test
     public void changeActiveStrikeFailed(){
-        UserStrike userStrike = new UserStrike("test@gmail.com", new ArrayList<>(),true);
         ResponseEntity<String> responseEntity  =strikeControllers.changeActiveStrike("test@gmail.com");
         assertEquals(HttpStatus.NOT_FOUND,responseEntity.getStatusCode());
     }
@@ -122,7 +115,6 @@ class StrikeControllersTest {
 
     @Test
     public void removeStrikeToUserFailed(){
-        UserStrike userStrike = new UserStrike("test@gmail.com", new ArrayList<>(),true);
         ResponseEntity<String> responseEntity  =strikeControllers.removeStrikeToUser("test@gmail.com",0);
         assertEquals(HttpStatus.NOT_FOUND,responseEntity.getStatusCode());
     }

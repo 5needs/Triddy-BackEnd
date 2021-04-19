@@ -77,7 +77,7 @@ public class UniversityServiceImplTest {
             Reclaim reclaim = new Reclaim("12","13","14","robo","muy malo todo");
             reclaimService.addReclaim(reclaim);
             reclaimService.deleteReclaimByIidReclaim("12");
-            Reclaim reclaim2 = reclaimService.getReclaimById("12");
+            reclaimService.getReclaimById("12");
         }catch (TriddyServiceException e) {
             System.out.println(e.getMessage());
             assertTrue(e.getMessage().contains("Reclaim with Id : 12 is not registered"));
