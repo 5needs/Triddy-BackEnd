@@ -1,5 +1,7 @@
 package edu.eci.ieti.triddy;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -10,7 +12,7 @@ class TriddyApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
+	
 	@Test
 	void testmain() {
 		try{
