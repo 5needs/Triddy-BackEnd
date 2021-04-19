@@ -7,4 +7,5 @@ public class TriddyServiceException extends Exception {
     public TriddyServiceException(String msg) {
         super(msg);
     }
+    
 }
