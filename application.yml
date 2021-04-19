@@ -1,4 +1,8 @@
 spring:
   data:
     mongodb:
-    uri: mongodb+srv://ricardo:LqpLBxHkDyikucBi@cluster-ieti.htfx4.mongodb.net/projectDB?retryWrites=true&w=majority
+      uri: mongodb+srv://triddy:123@cluster0.ey557.mongodb.net/triddy?retryWrites=true&w=majority
+  servlet:
+    multipart:
+      max-file-size: 3MB
+      max-request-size: 3MB
