@@ -36,14 +36,14 @@ public class LoginControllerTest {
         User user = new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null);
         userService.createUser(user);
 
-        ResponseEntity<String> response = loginController.login(new User("test@mail.com", "abc123", null, null, null, null, null));
+        ResponseEntity<?> response = loginController.login(new User("test@mail.com", "abc123", null, null, null, null, null));
         assertEquals(HttpStatus.ACCEPTED, response.getStatusCode());
     }
 
     @Test
     void loginFailTest() {
 
-        ResponseEntity<String> response = loginController.login(new User("test@mail.com", "abc123", null, null, null, null, null));
+        ResponseEntity<?> response = loginController.login(new User("test@mail.com", "abc123", null, null, null, null, null));
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
@@ -53,7 +53,7 @@ public class LoginControllerTest {
         User user = new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null);
         userService.createUser(user);
 
-        ResponseEntity<String> response = loginController.login(new User("test@mail.com", "123abc", null, null, null, null, null));
+        ResponseEntity<?> response = loginController.login(new User("test@mail.com", "123abc", null, null, null, null, null));
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 
@@ -61,14 +61,14 @@ public class LoginControllerTest {
     @Test
     void loginNullPasswordTest() {
 
-        ResponseEntity<String> response = loginController.login(new User("test@mail.com", null, null, null, null, null, null));
+        ResponseEntity<?> response = loginController.login(new User("test@mail.com", null, null, null, null, null, null));
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 
     @Test
     void loginNullUsernameTest() {
 
-        ResponseEntity<String> response = loginController.login(new User(null,"123abc" , null, null, null, null, null));
+        ResponseEntity<?> response = loginController.login(new User(null,"123abc" , null, null, null, null, null));
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 }

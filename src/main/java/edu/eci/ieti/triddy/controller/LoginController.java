@@ -24,10 +24,10 @@ public class LoginController {
     private LoginService loginService;
 
     @PostMapping
-    public ResponseEntity<String>  login( @RequestBody User login )
+    public ResponseEntity<?>  login( @RequestBody User login )
     {   
         try{
-            return new ResponseEntity<>( loginService.login(login), HttpStatus.ACCEPTED);
+            return new ResponseEntity<>( new Token( loginService.login(login)), HttpStatus.ACCEPTED);
         }catch(ServletException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
         } catch (UserNotFoundException e) {
@@ -35,4 +35,25 @@ public class LoginController {
         }
     }
     
+    public class Token
+    {
+
+        String access_token;
+
+        Token( String access_token )
+        {
+            this.access_token = access_token;
+        }
+
+        public String getAccessToken()
+        {
+            return access_token;
+        }
+
+        public void setAccessToken( String access_token )
+        {
+            this.access_token = access_token;
+        }
+    }
+
 }
