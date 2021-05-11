@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.eci.ieti.triddy.exceptions.UserNotFoundException;
+import edu.eci.ieti.triddy.model.Token;
 import edu.eci.ieti.triddy.model.User;
 import edu.eci.ieti.triddy.services.LoginService;
 
@@ -32,27 +33,6 @@ public class LoginController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
         } catch (UserNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
-        }
-    }
-    
-    public class Token
-    {
-
-        String access_token;
-
-        Token( String access_token )
-        {
-            this.access_token = access_token;
-        }
-
-        public String getAccessToken()
-        {
-            return access_token;
-        }
-
-        public void setAccessToken( String access_token )
-        {
-            this.access_token = access_token;
         }
     }
 

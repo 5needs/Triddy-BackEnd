@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import edu.eci.ieti.triddy.model.Token;
 import edu.eci.ieti.triddy.model.User;
 import edu.eci.ieti.triddy.repository.UserRepository;
 import edu.eci.ieti.triddy.services.UserService;
@@ -56,14 +57,14 @@ public class JwtFilterTest {
 
         HttpEntity<User> request = new HttpEntity<>(loginUser, headers);
          
-        ResponseEntity<String> response = this.restTemplate.postForEntity(url+"/login", request, String.class);
+        ResponseEntity<Token> response = this.restTemplate.postForEntity(url+"/login", request, Token.class);
 
         assertEquals(HttpStatus.ACCEPTED, response.getStatusCode());;
 
-        String token = response.getBody();
+        Token token = response.getBody();
 
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", "Bearer "+token);
+        headers.set("Authorization", "Bearer "+token.getAccessToken());
 
         HttpEntity<String> request2  = new HttpEntity<>(headers);
         ResponseEntity<String> response2 = this.restTemplate.exchange(url+"/api/users", HttpMethod.GET, request2, String.class);
