@@ -1,5 +1,6 @@
 package edu.eci.ieti.triddy.services.impl;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +36,9 @@ public class ChatServiceImpl implements ChatService {
     }
 
     public List<Chat> getChatsFromUser(String user){
-        return chatRepository.findByUser1OrUser2(user, user);
+        List<Chat> chats = chatRepository.findByUser1OrUser2(user, user);
+        chats.sort(Comparator.comparing(chat -> chat.getLastMessage().getDate()));
+        return chats;
     }
 
     public Chat addNewChat(Chat chat){

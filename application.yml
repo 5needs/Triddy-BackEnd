@@ -1,4 +1,4 @@
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://ieti_user:IETI2021@ieti.jmv5p.mongodb.net/project?retryWrites=true&w=majority
+      uri: mongodb+srv://triddy:123@cluster0.ey557.mongodb.net/triddy?retryWrites=true&w=majority
