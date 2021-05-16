@@ -22,6 +22,14 @@ public class ProductController {
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         } catch (ProductException e) {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+
+    @PutMapping(value = "/edit/{id}")
+    public ResponseEntity<String> editProduct(@RequestBody Product product, @PathVariable  String id) {
+        try {
+            productService.editProduct(id,product);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (ProductException e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
 }

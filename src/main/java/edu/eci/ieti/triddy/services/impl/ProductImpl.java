@@ -21,4 +21,17 @@ public class ProductImpl implements ProductService {
         productRepository.save(product);
         return "successfully created";
     }
+    
+    public void editProduct(String id, Product product) throws ProductException {
+        if (product.getName() == null || product.getDescription() == null) {
+            throw new ProductException("values cannot be null");
+        } else {
+            Product productBD= (Product) productRepository.findAllById(id).orElseThrow(()->new ProductException("Product not found"));
+            productBD.setPictures(product.getPictures());
+            productBD.setName(product.getName());
+            productBD.setDescription(product.getDescription());
+            productBD.setAvailable(product.getAvailable());
+            productRepository.save(productBD);
+        }
+    }
 }

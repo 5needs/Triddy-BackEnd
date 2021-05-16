@@ -5,4 +5,5 @@ import edu.eci.ieti.triddy.model.Product;
 
 public interface ProductService {
     String createProduct(Product product) throws ProductException;
+    void editProduct(String id, Product product) throws ProductException;
 }
