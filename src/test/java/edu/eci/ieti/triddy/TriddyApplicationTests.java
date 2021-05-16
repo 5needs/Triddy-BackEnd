@@ -7,9 +7,18 @@ import static org.junit.jupiter.api.Assertions.fail;
 @SpringBootTest
 class TriddyApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    /*@Test
+    void contextLoads() {
+    }
+
+    @Test
+    void testmain() {
+        try{
+            TriddyApplication.main(new String[] {});
+        } catch (Exception e){
+            fail();
+        }
+    }*/
 
 	@Test
 	void testmain() {
