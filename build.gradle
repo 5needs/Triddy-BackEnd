@@ -17,6 +17,11 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation group: 'org.apache.shiro', name: 'shiro-crypto-hash', version: '1.7.1'
+	// implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'io.jsonwebtoken:jjwt:0.6.0'
+	implementation "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2"
+    // implementation "org.glassfish.jaxb:jaxb-runtime:2.3.2"
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
 }

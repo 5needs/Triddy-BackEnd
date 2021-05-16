@@ -1,5 +1,7 @@
 package edu.eci.ieti.triddy;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -28,5 +30,13 @@ class TriddyApplicationTests {
 			fail();
 		}
 	}
-
+	
+	@Test
+	void testmain() {
+		try{
+			TriddyApplication.main(new String[] {});
+		} catch (Exception e){
+			fail();
+		}
+	}
 }
