@@ -29,12 +29,4 @@ class TriddyApplicationTests {
 		}
 	}
 
-	@Test
-	void testmain() {
-		try{
-			TriddyApplication.main(new String[] {});
-		} catch (Exception e) {
-			fail();
-		}
-	}
 }
