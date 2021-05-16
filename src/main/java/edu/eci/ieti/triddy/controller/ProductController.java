@@ -22,6 +22,8 @@ public class ProductController {
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         } catch (ProductException e) {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
 
     @PutMapping(value = "/edit/{id}")
     public ResponseEntity<String> editProduct(@RequestBody Product product, @PathVariable  String id) {
