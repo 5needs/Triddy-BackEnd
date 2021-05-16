@@ -39,7 +39,7 @@ class ProductControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
     @Test
-    void shouldException() {
+    void shouldExceptionProductEdit() {
         Product product = new Product(null,"description","nombre");
         String[] list = {"img"};
         Product product2 = new Product(list,null,null);
