@@ -34,4 +34,12 @@ public class ProductImpl implements ProductService {
             productRepository.save(productBD);
         }
     }
+
+    public void deleteProduct(String id) throws ProductException {
+        if(productRepository.existsById(id)) {
+            productRepository.deleteById(id);
+        } else {
+            throw new ProductException("Product not found");
+        }
+    }
 }

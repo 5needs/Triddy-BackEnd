@@ -10,11 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class ProductServiceTest {
     @Autowired
     ProductService productService;
+
+    @Autowired
+    ProductRepository productRepository;
 
     @Test
     void createProduct() throws ProductException {
@@ -23,26 +27,19 @@ class ProductServiceTest {
         assertEquals("successfully created", string);
     }
 
-    @Autowired
-    ProductRepository productRepository;
-
     @Test
-    void editProduct() throws ProductException {
+    void deleteProductService() throws ProductException {
         Product product = new Product(null,"description","nombre");
         productRepository.save(product);
-        String[] list = {"img"};
-        Product product2 = new Product(list,"description2","nombre2");
-        productService.editProduct(product.getId(), product2);
-        Product productBD= (Product) productRepository.findAllById(product.getId()).orElseThrow(()->new ProductException("Product not found"));
-        assertEquals(product2.getName(),productBD.getName());
+        productService.deleteProduct(product.getId());
+        assertFalse(productRepository.existsById(product.getId()));
     }
     @Test
-    void shouldException()  {
+    void shouldExceptionDeleteProduct()  {
         try {
             Product product = new Product(null,"description1","nombre1");
             productRepository.save(product);
-            Product product2 = new Product(null,null,null);
-            productService.editProduct(product.getId(), product2);
+            productService.deleteProduct("id does not exist");
         } catch (ProductException e) {
             assertTrue(true);
         }

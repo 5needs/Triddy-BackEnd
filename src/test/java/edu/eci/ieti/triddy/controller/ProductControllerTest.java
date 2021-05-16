@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @SpringBootTest
 class ProductControllerTest {
@@ -44,6 +45,18 @@ class ProductControllerTest {
         String[] list = {"img"};
         Product product2 = new Product(list,null,null);
         ResponseEntity<String> response = productController.editProduct(product2,product.getId());
+        assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
+    }
+
+    @Test
+    void deleteProductTest() throws ProductException {
+        Product product = new Product(null,"description","nombre");
+        ResponseEntity<String> response = productController.deleteProduct(product.getId());
+        assertFalse(productRepository.existsById(product.getId()));
+    }
+    @Test
+    void shouldExceptionProductTest() {
+        ResponseEntity<String> response = productController.deleteProduct("id does not exist");
         assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
     }
 }

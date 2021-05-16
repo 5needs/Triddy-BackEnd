@@ -1,5 +1,4 @@
 package edu.eci.ieti.triddy.controller;
-
 import edu.eci.ieti.triddy.exceptions.ProductException;
 import edu.eci.ieti.triddy.model.Product;
 import edu.eci.ieti.triddy.services.ProductService;
@@ -29,6 +28,11 @@ public class ProductController {
     public ResponseEntity<String> editProduct(@RequestBody Product product, @PathVariable  String id) {
         try {
             productService.editProduct(id,product);
+
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity<String> deleteProduct(@PathVariable  String id) {
+        try {
+            productService.deleteProduct(id);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (ProductException e) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
