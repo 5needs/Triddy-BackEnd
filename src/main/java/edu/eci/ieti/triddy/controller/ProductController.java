@@ -28,6 +28,11 @@ public class ProductController {
     public ResponseEntity<String> editProduct(@RequestBody Product product, @PathVariable  String id) {
         try {
             productService.editProduct(id,product);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (ProductException e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+    }
 
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable  String id) {
