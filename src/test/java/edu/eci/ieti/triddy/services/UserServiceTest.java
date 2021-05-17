@@ -36,7 +36,7 @@ class UserServiceTest {
 
     @Test
     void createAndgetUserTest() throws UserNotFoundException, TriddyServiceException{
-        User user1 = userService.createUser(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null));
+        User user1 = userService.createUser(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null, "CC", "123456789"));
         User user2 = userService.getUser("test@mail.com");
         assertNotNull(user1);
         assertNotNull(user2);
@@ -45,9 +45,20 @@ class UserServiceTest {
     @Test
     void createRepeatedUserTest(){
         try {
-            User user1 = userService.createUser(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null));
-            assertNotNull(user1);
-            userService.createUser(new User("test@mail.com", "abc789", "Test other", "other U", "other career", null, null));
+            User user = userService.createUser(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null, "CC", "123456789"));
+            assertNotNull(user);
+            userService.createUser(new User("test@mail.com", "abc789", "Test other", "other U", "other career", null, null, "CC", "123456789"));
+        } catch (TriddyServiceException e) {
+            assertEquals("User already exist",e.getMessage());
+        }
+    }
+
+    @Test
+    void createRepeatedUserTest2(){
+        try {
+            User user = userService.createUser(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null, "CC", "123456789"));
+            assertNotNull(user);
+            userService.createUser(new User("test2@mail.com", "abc789", "Test other", "other U", "other career", null, null, "CC", "123456789"));
         } catch (TriddyServiceException e) {
             assertEquals("User already exist",e.getMessage());
         }
@@ -56,7 +67,7 @@ class UserServiceTest {
     @Test 
     void createUserEmptyEmailTest(){
         try {
-            userService.createUser(new User(null, "abc123", "Test User", "test U", "test career", null, null));
+            userService.createUser(new User(null, "abc123", "Test User", "test U", "test career", null, null, "CC", "123456789"));
         } catch (TriddyServiceException e) {
             assertEquals("Incomplete or empty user data",e.getMessage());
         }
@@ -64,7 +75,7 @@ class UserServiceTest {
     @Test 
     void createUserEmptyPasswordTest(){
         try {
-            userService.createUser(new User("test@mail.com", null, "Test other", "other U", "other career", null, null));
+            userService.createUser(new User("test@mail.com", null, "Test other", "other U", "other career", null, null, "CC", "123456789"));
         } catch (TriddyServiceException e) {
             assertEquals("Incomplete or empty user data",e.getMessage());
         }
@@ -72,7 +83,25 @@ class UserServiceTest {
     @Test 
     void createUserEmptyNameTest(){
         try {
-            userService.createUser(new User("test@mail.com", "abc789", null, "other U", "other career", null, null));
+            userService.createUser(new User("test@mail.com", "abc789", null, "other U", "other career", null, null,"CC", "123456789"));
+        } catch (TriddyServiceException e) {
+            assertEquals("Incomplete or empty user data",e.getMessage());
+        }
+    }
+
+    @Test 
+    void createUserEmptyDocNumTest(){
+        try {
+            userService.createUser(new User("test@mail.com", "abc789", "Test other", "other U", "other career", null, null,"CC", null));
+        } catch (TriddyServiceException e) {
+            assertEquals("Incomplete or empty user data",e.getMessage());
+        }
+    }
+
+    @Test 
+    void createUserNotValidDocTypeTest(){
+        try {
+            userService.createUser(new User("test@mail.com", "abc789", "Test other", "other U", "other career", null, null,"AA", "123456789"));
         } catch (TriddyServiceException e) {
             assertEquals("Incomplete or empty user data",e.getMessage());
         }
@@ -89,7 +118,7 @@ class UserServiceTest {
 
     @Test
     void delValidUserTest() throws TriddyServiceException, UserNotFoundException{
-        userService.createUser(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null));
+        userService.createUser(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null, "CC", "123456789"));
         User user = userService.getUser("test@mail.com");
         assertNotNull(user);
         userService.delUser("test@mail.com");
@@ -108,8 +137,8 @@ class UserServiceTest {
 
     @Test
     void changeNameTest() throws TriddyServiceException, UserNotFoundException{
-        userService.createUser(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null));
-        User newName = new User("test@mail.com", null, "New Name", null, null, null, null);
+        userService.createUser(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null, "CC", "123456789"));
+        User newName = new User("test@mail.com", null, "New Name", null, null, null, null, null, null);
         userService.changeFullname(newName);
         User user = userService.getUser("test@mail.com");
         assertEquals("New Name", user.getFullname());
@@ -117,7 +146,7 @@ class UserServiceTest {
 
     @Test
     void changeNameExceptionTest() {
-        User newName = new User("test@mail.com", null, "New Name", null, null, null, null);
+        User newName = new User("test@mail.com", null, "New Name", null, null, null, null, null, null);
         try {
             userService.changeFullname(newName);
         } catch (UserNotFoundException e) {
@@ -127,8 +156,8 @@ class UserServiceTest {
 
     @Test
     void changeUniversityTest() throws TriddyServiceException, UserNotFoundException{
-        userService.createUser(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null));
-        User other = new User("test@mail.com", null, null, "Other uni", null, null, null);
+        userService.createUser(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null, "CC", "123456789"));
+        User other = new User("test@mail.com", null, null, "Other uni", null, null, null, null, null);
         userService.changeUniversity(other);
         User user = userService.getUser("test@mail.com");
         assertEquals("Other uni", user.getUniversity());
@@ -136,7 +165,7 @@ class UserServiceTest {
 
     @Test
     void changeUniversityExceptionTest() {
-        User other = new User("test@mail.com", null, null, "Other uni", null, null, null);
+        User other = new User("test@mail.com", null, null, "Other uni", null, null, null, null, null);
         try {
             userService.changeUniversity(other);
         } catch (UserNotFoundException e) {
@@ -145,8 +174,8 @@ class UserServiceTest {
     }
     @Test
     void changeCareerTest() throws TriddyServiceException, UserNotFoundException{
-        userService.createUser(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null));
-        User other = new User("test@mail.com", null, null, null, "Other career", null, null);
+        userService.createUser(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null, "CC", "123456789"));
+        User other = new User("test@mail.com", null, null, null, "Other career", null, null, null, null);
         userService.changeCareer(other);
         User user = userService.getUser("test@mail.com");
         assertEquals("Other career", user.getCareer());
@@ -154,7 +183,7 @@ class UserServiceTest {
 
     @Test
     void changeCareerExceptionTest() {
-        User other = new User("test@mail.com", null, null, null, "Other career", null, null);
+        User other = new User("test@mail.com", null, null, null, "Other career", null, null, null, null);
         try {
             userService.changeCareer(other);
         } catch (UserNotFoundException e) {
@@ -164,8 +193,8 @@ class UserServiceTest {
 
     @Test
     void changePictureTest() throws TriddyServiceException, UserNotFoundException{
-        userService.createUser(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null));
-        User other = new User("test@mail.com", null, null, null, null, "http://example.jpg", null);
+        userService.createUser(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null, "CC", "123456789"));
+        User other = new User("test@mail.com", null, null, null, null, "http://example.jpg", null, null, null);
         userService.changePicture(other);
         User user = userService.getUser("test@mail.com");
         assertEquals("http://example.jpg", user.getPicture());
@@ -173,7 +202,7 @@ class UserServiceTest {
 
     @Test
     void changePictureExceptionTest() {
-        User other = new User("test@mail.com", null, null, null, null, "http://example.jpg", null);
+        User other = new User("test@mail.com", null, null, null, null, "http://example.jpg", null, null, null);
         try {
             userService.changePicture(other);
         } catch (UserNotFoundException e) {
@@ -183,7 +212,7 @@ class UserServiceTest {
 
     @Test
     void changeFavoritesTest() throws TriddyServiceException, UserNotFoundException{
-        userService.createUser(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, new ArrayList<String>()));
+        userService.createUser(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, new ArrayList<String>(), "CC", "123456789"));
         List<String> data = new ArrayList<String>();
         data.add("aaaaa");
         userService.changeFavorites("test@mail.com", data);

@@ -13,7 +13,7 @@ class TriddyUserTest {
     
     @Test
     void createUser(){
-        User user = new User("user@test.com", "123ABC", "tester", "test U", "example career", null, null);
+        User user = new User("user@test.com", "123ABC", "tester", "test U", "example career", null, null, null, null);
         assertEquals("tester", user.getFullname());
         assertEquals("user@test.com", user.getEmail());
         assertEquals("123ABC", user.getPassword());
@@ -21,7 +21,7 @@ class TriddyUserTest {
 
     @Test
     void validBasicSetMethods(){
-        User user = new User("user@mail.com", "123ABC", "tester", "test U", "example career", null, null);
+        User user = new User("user@mail.com", "123ABC", "tester", "test U", "example career", null, null, null, null);
 
         user.setEmail("other@mail.com");
         assertEquals("other@mail.com", user.getEmail());
@@ -41,7 +41,7 @@ class TriddyUserTest {
 
     @Test
     void validOtherSetsUser(){
-        User user = new User("user@mail.com", "123ABC", "tester", "test U", "example career", null, null);
+        User user = new User("user@mail.com", "123ABC", "tester", "test U", "example career", null, null, null, null);
         user.setPicture("http://url.com");
         assertEquals("http://url.com", user.getPicture());
         List<String> fav = new ArrayList<String>();
@@ -53,8 +53,8 @@ class TriddyUserTest {
 
     @Test
     void validToStringMethod(){
-        User user = new User("user@test.com", "123ABC", "tester", "test U", "example career", null, null);
-        String expected = String.format("User[ email='%s', password='%s', fullname='%s', university='%s', career='%s' ]", "user@test.com", "123ABC", "tester", "test U", "example career");
+        User user = new User("user@test.com", "123ABC", "tester", "test U", "example career", null, null, "CC", "123456789");
+        String expected = String.format("User[ email='%s', password='%s', fullname='%s', university='%s', career='%s', docType='CC', docNum='123456789' ]", "user@test.com", "123ABC", "tester", "test U", "example career");
         assertEquals(expected, user.toString());
     }
 }

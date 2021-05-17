@@ -1,5 +1,6 @@
 package edu.eci.ieti.triddy.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     UserRepository userRepository;
+    public List<String> docTypes = new ArrayList<String>(List.of("CC","TI","CE"));
 
     @Override
     public List<User> getUsers() {
@@ -41,7 +43,8 @@ public class UserServiceImpl implements UserService{
     public User createUser(User user) throws TriddyServiceException {
         if(validateInfo(user)){
             User res = userRepository.findByEmail(user.getEmail());
-            if (res == null){
+            User res2 = userRepository.findByDocNum(user.getDocNum());
+            if (res == null && res2 == null){
                 user.setPassword(new Sha512Hash(user.getPassword()).toHex());
                 return userRepository.save(user);
             }else{
@@ -55,7 +58,7 @@ public class UserServiceImpl implements UserService{
 
     private boolean validateInfo(User user) {
         boolean value = false;
-        if (user.getEmail() != null && user.getPassword() != null && user.getFullname() != null){
+        if (user.getEmail() != null && user.getPassword() != null && user.getFullname() != null && user.getDocNum() != null && docTypes.contains(user.getDocType())){
             value = true;
         }
         return value;

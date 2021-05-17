@@ -28,7 +28,7 @@ class TriddyNotificationControllerTest {
     
     @BeforeEach
     void setTestUser(){
-        userRepository.save(new User("user@test.com", "abc123", "Test User", "test U", "test career", null, null));
+        userRepository.save(new User("user@test.com", "abc123", "Test User", "test U", "test career", null, null, null, null));
     }
 
     @AfterEach

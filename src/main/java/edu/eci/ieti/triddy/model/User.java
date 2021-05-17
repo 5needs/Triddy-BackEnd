@@ -14,13 +14,15 @@ public class User {
     private String university;
     private String career;
     private List<String> favorites;
+    private String docType;
+    private String docNum;
 
     public User()
     {
      super();
     }
 
-    public User(String email, String password, String fullname, String university, String career, String picture, List<String> favorites) {
+    public User(String email, String password, String fullname, String university, String career, String picture, List<String> favorites, String docType, String docNum ) {
         this.email = email;
         this.password = password;
         this.fullname = fullname;
@@ -28,6 +30,8 @@ public class User {
         this.career = career;
         this.picture = picture;
         this.favorites = favorites;
+        this.docType = docType;
+        this.docNum = docNum;
     }
     
     public String getEmail() {
@@ -87,9 +91,25 @@ public class User {
     }
 
 
+    public String getDocType() {
+        return this.docType;
+    }
+
+    public void setDocType(String docType) {
+        this.docType = docType;
+    }
+
+    public String getDocNum() {
+        return this.docNum;
+    }
+
+    public void setDocNum(String docNum) {
+        this.docNum = docNum;
+    }
+
     @Override
     public String toString() {
-        return String.format("User[ email='%s', password='%s', fullname='%s', university='%s', career='%s' ]",email,password,fullname,university,career);
+        return String.format("User[ email='%s', password='%s', fullname='%s', university='%s', career='%s', docType='%s', docNum='%s' ]",email,password,fullname,university,career,docType,docNum);
     }
 
 }

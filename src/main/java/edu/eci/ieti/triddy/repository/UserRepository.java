@@ -8,5 +8,7 @@ public interface UserRepository extends MongoRepository<User, String>{
     public User findByEmail(String email);
 
     public void deleteByEmail(String string);
+
+    public User findByDocNum(String docNum);
     
 }

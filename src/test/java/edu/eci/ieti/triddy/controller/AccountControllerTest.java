@@ -28,60 +28,60 @@ class AccountControllerTest {
 
     @Test
     void changeFullnameTest(){
-        userRepository.save(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null));
-        User user = new User("test@mail.com", null, "New Name", null, null, null, null);
+        userRepository.save(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null, null, null));
+        User user = new User("test@mail.com", null, "New Name", null, null, null, null, null, null);
         ResponseEntity<String> response = accountController.updateFullname(user);
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
     void notValidChangeFullnameTest(){
-        User user = new User("test@mail.com", null, "New Name", null, null, null, null);
+        User user = new User("test@mail.com", null, "New Name", null, null, null, null, null, null);
         ResponseEntity<String> response = accountController.updateFullname(user);
         assertEquals(HttpStatus.NOT_ACCEPTABLE, response.getStatusCode());
     }
 
     @Test
     void changeUniversityTest(){
-        userRepository.save(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null));
-        User user = new User("test@mail.com", null, null, "Other uni", null, null, null);
+        userRepository.save(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null, null, null));
+        User user = new User("test@mail.com", null, null, "Other uni", null, null, null, null, null);
         ResponseEntity<String> response = accountController.updateUniversity(user);
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
     void notValidChangeUniversityTest(){
-        User user = new User("test@mail.com", null, null, "Other uni", null, null, null);
+        User user = new User("test@mail.com", null, null, "Other uni", null, null, null, null, null);
         ResponseEntity<String> response = accountController.updateUniversity(user);
         assertEquals(HttpStatus.NOT_ACCEPTABLE, response.getStatusCode());
     }
     
     @Test
     void changeCareerTest(){
-        userRepository.save(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null));
-        User user = new User("test@mail.com", null, null, null, "Other career", null, null);
+        userRepository.save(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null, null, null));
+        User user = new User("test@mail.com", null, null, null, "Other career", null, null, null, null);
         ResponseEntity<String> response = accountController.updateCareer(user);
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
     void notValidChangeCareerTest(){
-        User user = new User("test@mail.com", null, null, null, "Other career", null, null);
+        User user = new User("test@mail.com", null, null, null, "Other career", null, null, null, null);
         ResponseEntity<?> response = accountController.updateCareer(user);
         assertEquals(HttpStatus.NOT_ACCEPTABLE, response.getStatusCode());
     }
 
     @Test
     void changePictureTest(){
-        userRepository.save(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null));
-        User user = new User("test@mail.com", null, null, null, null, "http://example.jpg", null);
+        userRepository.save(new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null, null, null));
+        User user = new User("test@mail.com", null, null, null, null, "http://example.jpg", null, null, null);
         ResponseEntity<?> response = accountController.updatePicture(user);
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
     void notValidChangePictureTest(){
-        User user = new User("test@mail.com", null, null, null, null, "http://example.jpg", null);
+        User user = new User("test@mail.com", null, null, null, null, "http://example.jpg", null, null, null);
         ResponseEntity<?> response = accountController.updatePicture(user);
         assertEquals(HttpStatus.NOT_ACCEPTABLE, response.getStatusCode());
     }

@@ -20,4 +20,5 @@ public interface UserService {
     void changeCareer(User user) throws UserNotFoundException;
     void changePicture(User user) throws UserNotFoundException;
     void changeFavorites(String user, List<String> favorites) throws UserNotFoundException;
+
 }

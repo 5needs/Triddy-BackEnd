@@ -45,7 +45,7 @@ public class JwtFilterTest {
 	@Test
 	public void loginTest() throws Exception {
 
-        User u = new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null);
+        User u = new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null, "CC", "123456789");
         userService.createUser(u);
 
 		String url = "http://localhost:" +port;
@@ -53,7 +53,7 @@ public class JwtFilterTest {
         HttpHeaders headers = new HttpHeaders();
         headers.set("X-COM-PERSIST", "true");   
         
-        User loginUser = new User("test@mail.com","abc123", null, null, null, null, null);
+        User loginUser = new User("test@mail.com","abc123", null, null, null, null, null, null, null);
 
         HttpEntity<User> request = new HttpEntity<>(loginUser, headers);
          

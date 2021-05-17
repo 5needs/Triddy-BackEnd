@@ -36,14 +36,14 @@ class UserControllerTest {
 
     @Test
     void postUserTest(){
-        User u = new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null);
+        User u = new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null, "CC", "123456789");
         ResponseEntity<User> response = userController.postUser(u);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
 
     @Test
     void postNotValidUserTest(){
-        User u = new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null);
+        User u = new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null, null, null);
         userController.postUser(u);
         ResponseEntity<User> response = userController.postUser(u);
         assertEquals(HttpStatus.NOT_ACCEPTABLE, response.getStatusCode());
@@ -51,7 +51,7 @@ class UserControllerTest {
 
     @Test
     void getUserTest(){
-        User u = new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null);
+        User u = new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null, "CC", "123456789");
         userController.postUser(u);
         ResponseEntity<User> response = userController.getUser("test@mail.com");
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -65,7 +65,7 @@ class UserControllerTest {
     
     @Test
     void delUserTest(){
-        User u = new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null);
+        User u = new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null, "CC", "123456789");
         userController.postUser(u);
         ResponseEntity<String> response = userController.delUser("test@mail.com");
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -79,7 +79,7 @@ class UserControllerTest {
     
     @Test
     void changeFavoritesTest(){
-        User u = new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null);
+        User u = new User("test@mail.com", "abc123", "Test User", "test U", "test career", null, null, "CC", "123456789");
         userController.postUser(u);
         List<String> favorites = new ArrayList<String>();
         favorites.add("aaaa");
