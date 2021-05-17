@@ -3,6 +3,8 @@ package edu.eci.ieti.triddy.controller;
 import edu.eci.ieti.triddy.exceptions.ProductException;
 import edu.eci.ieti.triddy.model.Product;
 import edu.eci.ieti.triddy.repository.ProductRepository;
+import edu.eci.ieti.triddy.services.ProductService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 class ProductControllerTest {
     @Autowired
     ProductController productController;
+
     @Test
     void postProductCreate() throws ProductException {
         Product product = new Product(null,"description","nombre");
@@ -30,6 +33,7 @@ class ProductControllerTest {
 
     @Autowired
     ProductRepository productRepository;
+    
     @Test
     void putProductEdit() throws ProductException {
         Product product = new Product(null,"description","nombre");
@@ -59,4 +63,37 @@ class ProductControllerTest {
         ResponseEntity<String> response = productController.deleteProduct("id does not exist");
         assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
     }
+
+    @AfterEach
+    public void productRestart(){
+        productRepository.deleteAll();
+    }
+
+    @Test
+    public void getProduct(){
+        String[] temp = new String[2];
+        Product product = new Product(temp,"...","nameTest");
+        productRepository.save(product);
+        ResponseEntity<?> responseEntity = productController.getProduct(product.getId());
+        assertEquals(HttpStatus.ACCEPTED,responseEntity.getStatusCode());
+    }
+
+    @Test
+    public void getProductFailed(){
+        String[] temp = new String[2];
+        Product product = new Product(temp,"...","nameTest");
+        ResponseEntity<?> responseEntity = productController.getProduct(product.getId());
+        assertEquals(HttpStatus.NOT_FOUND,responseEntity.getStatusCode());
+    }
+
+    @Test
+    public void getProductByIdUser(){
+        String[] temp = new String[2];
+        Product product = new Product(temp,"...","nameTest");
+        productRepository.save(product);
+        ResponseEntity<?> responseEntity = productController.getProductByIdUser(product.getUserId());
+        assertEquals(HttpStatus.ACCEPTED,responseEntity.getStatusCode());
+    }
+
+
 }

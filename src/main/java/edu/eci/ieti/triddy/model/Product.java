@@ -21,6 +21,9 @@ public class Product {
         this.available = true;
     }
 
+    public Product() {
+    }
+
     public String getId() {
         return id;
     }
