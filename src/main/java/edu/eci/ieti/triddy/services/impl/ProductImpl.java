@@ -7,6 +7,8 @@ import edu.eci.ieti.triddy.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductImpl implements ProductService {
     @Autowired
@@ -41,5 +43,20 @@ public class ProductImpl implements ProductService {
         } else {
             throw new ProductException("Product not found");
         }
+    }
+
+    @Override
+    public Product getProduct(String idProduct) throws ProductException {
+        Product product = productRepository.findProductById(idProduct);
+        if (product == null){
+            throw  new ProductException("Product Not Found");
+        }
+        return product;
+    }
+
+    @Override
+    public List<Product> getProductByIdUser(String idUser) {
+        List<Product> products = productRepository.findByUserId(idUser);
+        return products;
     }
 }
