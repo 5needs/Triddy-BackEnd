@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.eci.ieti.triddy.exceptions.TriddyServiceException;
@@ -22,7 +21,6 @@ import edu.eci.ieti.triddy.services.UserService;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/users")
 public class UserController {
     
     @Autowired
@@ -33,7 +31,7 @@ public class UserController {
         return userService.getUsers();
     }
 
-    @GetMapping("/{email}")
+    @GetMapping("/api/users/{email}")
     public ResponseEntity<User> getUser(@PathVariable String email){
         try {
             return new ResponseEntity<>(userService.getUser(email),HttpStatus.OK);
@@ -42,7 +40,7 @@ public class UserController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/users")
     public ResponseEntity<User> postUser(@RequestBody User user){
         try {
             return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
@@ -52,7 +50,7 @@ public class UserController {
     
     }
 
-    @DeleteMapping("/{email}")
+    @DeleteMapping("/api/users/{email}")
     public ResponseEntity<String> delUser(@PathVariable String email){
         try {
             userService.delUser(email);
@@ -62,7 +60,7 @@ public class UserController {
         }
     }
     
-    @PutMapping("/{email}/favorites")
+    @PutMapping("/api/users/{email}/favorites")
     public ResponseEntity<String> changeFavorites(@PathVariable String email, @RequestBody List<String> favorites){
         try {
             userService.changeFavorites(email, favorites);
