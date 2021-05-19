@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping(value = "/api")
+@CrossOrigin(origins = "*")
 public class UniversityController {
 
     @Autowired
