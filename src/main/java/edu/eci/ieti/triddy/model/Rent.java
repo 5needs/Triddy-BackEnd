@@ -1,19 +1,21 @@
 package edu.eci.ieti.triddy.model;
 import org.springframework.data.annotation.Id;
+
+import java.util.Date;
 import java.util.UUID;
 
 public class Rent {
     @Id
     private String id;
-    private String userId;
+    private String userEmail;
     private String productId;
-    private String initialDate;
-    private String finalDate;
+    private Date initialDate;
+    private Date finalDate;
     private String status;
-    public Rent(String initialDate, String finalDate, String status) {
+    public Rent(String productId, String userEmail, Date initialDate, Date finalDate, String status) {
         setId();
-        setUserId();
-        setProductId();
+        this.productId = productId;
+        this.userEmail = userEmail;
         this.initialDate = initialDate;
         this.finalDate = finalDate;
         this.status = status;
@@ -25,16 +27,16 @@ public class Rent {
         UUID uuid = UUID.randomUUID();
         this.id = uuid.toString();
     }
-    public String getInitialDate() {
+    public Date getInitialDate() {
         return initialDate;
     }
-    public void setInitialDate(String initialDate) {
+    public void setInitialDate(Date initialDate) {
         this.initialDate = initialDate;
     }
-    public String getFinalDate() {
+    public Date getFinalDate() {
         return finalDate;
     }
-    public void setFinalDate(String finalDate) {
+    public void setFinalDate(Date finalDate) {
         this.finalDate = finalDate;
     }
     public String getStatus() {
@@ -43,16 +45,16 @@ public class Rent {
     public void setStatus(String status) {
         this.status = status;
     }
-    public String getUserId() {
-        return userId;
+    public String getUserEmail() {
+        return userEmail;
     }
-    public void setUserId() {
-        this.userId = "userId";
+    public void setUserId(String userEmail) {
+        this.userEmail = userEmail;
     }
     public String getProductId() {
         return productId;
     }
-    public void setProductId() {
-        this.productId = "productId";
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 }

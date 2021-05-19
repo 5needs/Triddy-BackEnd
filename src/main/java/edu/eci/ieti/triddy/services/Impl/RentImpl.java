@@ -1,10 +1,15 @@
 package edu.eci.ieti.triddy.services.Impl;
 import edu.eci.ieti.triddy.exceptions.RentException;
+import edu.eci.ieti.triddy.exceptions.TriddyServiceException;
 import edu.eci.ieti.triddy.model.Rent;
+import edu.eci.ieti.triddy.model.Reserve;
 import edu.eci.ieti.triddy.repository.RentRepository;
 import edu.eci.ieti.triddy.services.RentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class RentImpl implements RentService {
@@ -27,5 +32,14 @@ public class RentImpl implements RentService {
         } else {
             throw new RentException("the rent does not exist");
         }
+    }
+
+    @Override
+    public List<Rent> rents(String userEmail) throws RentException {
+        List<Rent> rents = rentRepository.findByUserEmail(userEmail);
+        if(rents.isEmpty()) {
+            throw new RentException("this user has no rented products");
+        }
+        return rents;
     }
 }
