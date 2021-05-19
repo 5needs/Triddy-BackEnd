@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 
 @RestController
 @RequestMapping(value = "/api")
+@CrossOrigin(origins = "*")
 public class PaymentController {
 
     @Autowired
