@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,23 +22,22 @@ import edu.eci.ieti.triddy.services.PhotoService;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/photos")
 public class PhotoController {
 
     @Autowired
     PhotoService photoService;
 
-    @GetMapping
+    @GetMapping("/api/photos")
     public ResponseEntity<List<Photo>> getPhotos(){
         return new ResponseEntity<>( photoService.getPhotos(),HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/api/photos")
     public ResponseEntity<String> addPhoto(@RequestParam("title") String title, @RequestParam("image") MultipartFile image) throws IOException {
         return new ResponseEntity<>(photoService.addPhoto(title, image), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/photos/{id}")
     public ResponseEntity<byte[]> getPhotoImage(@PathVariable String id) {
         try {
             Photo photo = photoService.getPhoto(id);
@@ -51,7 +49,7 @@ public class PhotoController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    @GetMapping("/{id}/title")
+    @GetMapping("/api/photos/{id}/title")
     public ResponseEntity<String> getPhotoTitle(@PathVariable String id) {
         try {
             String title = photoService.getPhotoTitle(id);
@@ -62,7 +60,7 @@ public class PhotoController {
         
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/api/photos/{id}")
     public ResponseEntity<String> delPhoto(@PathVariable String id){
         try {
             String title = photoService.delPhoto(id);
