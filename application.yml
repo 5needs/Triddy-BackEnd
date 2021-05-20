@@ -6,3 +6,8 @@ spring:
     multipart:
       max-file-size: 3MB
       max-request-size: 3MB
+server:
+  ssl:
+      key-store: keystore.p12
+      key-store-password: password
+      keyStoreType: PKCS12
