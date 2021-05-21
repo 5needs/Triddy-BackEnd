@@ -15,31 +15,30 @@ public class PointsServiceImpl implements PointsService {
 
     @Override
     public Points getPointsByIdClient(String idClient) throws TriddyServiceException {
-//        Points points = pointsRepository.findByIdClient(idClient);
-//        if (points != null){
-//            return points;
-//        }else{
-//            throw new TriddyServiceException("Points with Id Client: "+idClient+" is not registered");
-//        }
-        return null;
+        Points points = pointsRepository.findByIdClient(idClient);
+        if (points != null){
+            return points;
+        }else{
+            throw new TriddyServiceException("Points with Id Client: "+idClient+" is not registered");
+        }
     }
 
     @Override
     public void improveLevelUserPoints(String idClient, String level, String discount, String category) {
-//        try {
-//            Points points = getPointsByIdClient(idClient);
-//            points.setLevel(level);
-//            points.setDiscount(discount);
-//            points.setCategory(category);
-//            addPoints(points);
-//        } catch (TriddyServiceException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            Points points = getPointsByIdClient(idClient);
+            points.setLevel(level);
+            points.setDiscount(discount);
+            points.setCategory(category);
+            addPoints(points);
+        } catch (TriddyServiceException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void addPoints(Points points) {
-//        pointsRepository.save(points);
+        pointsRepository.save(points);
     }
 
 }
