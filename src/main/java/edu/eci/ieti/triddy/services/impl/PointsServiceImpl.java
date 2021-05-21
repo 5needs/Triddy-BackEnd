@@ -7,7 +7,7 @@ import edu.eci.ieti.triddy.services.PointsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("pointsService")
 public class PointsServiceImpl implements PointsService {
 
     @Autowired

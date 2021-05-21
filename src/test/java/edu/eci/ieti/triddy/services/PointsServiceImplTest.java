@@ -7,6 +7,7 @@ import edu.eci.ieti.triddy.services.Impl.PointsServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PointsServiceImplTest {
 
     @Autowired
+    @Qualifier("pointsService")
     PointsService pointsService;
 
     @Autowired
