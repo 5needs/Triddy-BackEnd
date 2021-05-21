@@ -14,9 +14,9 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class PointsServiceImplTest {
 
-//    @Autowired
-//    @Qualifier("pointsService")
-//    PointsService pointsService;
+    @Autowired
+    @Qualifier("pointsService")
+    PointsService pointsService;
 
     @Autowired
     PointsRepository pointsRepository;
@@ -28,12 +28,11 @@ class PointsServiceImplTest {
 
     @Test
     public void addPoints() {
-        PointsServiceImpl pointsServiceImpl = new PointsServiceImpl();
         Points points = new Points("12345","2","3000","Referido");
-        pointsServiceImpl.addPoints(points);
+        pointsService.addPoints(points);
         Points points2 = null;
         try {
-            points2 = pointsServiceImpl.getPointsByIdClient("12345");
+            points2 = pointsService.getPointsByIdClient("12345");
         } catch (TriddyServiceException e) {
             e.printStackTrace();
         }
