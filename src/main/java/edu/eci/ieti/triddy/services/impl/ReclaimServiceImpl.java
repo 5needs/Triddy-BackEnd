@@ -1,4 +1,4 @@
-package edu.eci.ieti.triddy.services.impl;
+package edu.eci.ieti.triddy.services.Impl;
 
 import edu.eci.ieti.triddy.model.Reclaim;
 import edu.eci.ieti.triddy.repository.ReclaimRepository;

@@ -2,7 +2,6 @@ package edu.eci.ieti.triddy.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
 import edu.eci.ieti.triddy.exceptions.TriddyServiceException;
 import edu.eci.ieti.triddy.model.UserStrike;
 import edu.eci.ieti.triddy.repository.StrikeRepository;

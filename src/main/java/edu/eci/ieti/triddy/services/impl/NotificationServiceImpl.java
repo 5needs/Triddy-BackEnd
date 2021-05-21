@@ -1,4 +1,4 @@
-package edu.eci.ieti.triddy.services.impl;
+package edu.eci.ieti.triddy.services.Impl;
 
 import java.util.List;
 import java.util.Optional;
