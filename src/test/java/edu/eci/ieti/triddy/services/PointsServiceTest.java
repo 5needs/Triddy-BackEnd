@@ -27,7 +27,7 @@ class PointsServiceTest {
     }
 
     @Test
-    public void addPoints() {
+    void addPoints() {
         try {
             pointsService.addPoints(new Points("12345","2","3000","Referido"));
             Points points2 = null;
