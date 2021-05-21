@@ -3,6 +3,7 @@ package edu.eci.ieti.triddy.services;
 import edu.eci.ieti.triddy.exceptions.TriddyServiceException;
 import edu.eci.ieti.triddy.model.Points;
 import edu.eci.ieti.triddy.repository.PointsRepository;
+import edu.eci.ieti.triddy.services.Impl.PointsServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +11,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class PointsServiceImplTest {
+class PointsServiceImplTest {
 
     @Autowired
     PointsService pointsService;
 
     @Autowired
     PointsRepository pointsRepository;
-    
+
     @AfterEach
     void deletePayments(){
         pointsRepository.deleteAll();
