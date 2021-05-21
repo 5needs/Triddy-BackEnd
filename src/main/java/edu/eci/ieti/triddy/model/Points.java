@@ -30,10 +30,6 @@ public class Points {
         return idClient;
     }
 
-    public void setIdClient(String idClient) {
-        this.idClient = idClient;
-    }
-
     public String getDiscount() {
         return discount;
     }
