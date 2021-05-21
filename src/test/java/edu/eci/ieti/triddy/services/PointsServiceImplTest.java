@@ -1,6 +1,5 @@
 package edu.eci.ieti.triddy.services;
 
-import edu.eci.ieti.triddy.controller.PointsController;
 import edu.eci.ieti.triddy.exceptions.TriddyServiceException;
 import edu.eci.ieti.triddy.model.Points;
 import edu.eci.ieti.triddy.repository.PointsRepository;
@@ -18,10 +17,7 @@ public class PointsServiceImplTest {
 
     @Autowired
     PointsRepository pointsRepository;
-
-    @Autowired
-    PointsController pointsController;
-
+    
     @AfterEach
     void deletePayments(){
         pointsRepository.deleteAll();
@@ -31,7 +27,12 @@ public class PointsServiceImplTest {
     public void addPoints() {
         Points points = new Points("12345","2","3000","Referido");
         pointsService.addPoints(points);
-        Points points2 = pointsRepository.findByIdClient("12345");
+        Points points2 = null;
+        try {
+            points2 = pointsService.getPointsByIdClient("12345");
+        } catch (TriddyServiceException e) {
+            e.printStackTrace();
+        }
         assertNotNull(points2.getIdClient());
     }
 
