@@ -15,7 +15,7 @@ public class PointsServiceImpl implements PointsService {
 
     @Override
     public Points getPointsByIdClient(String idClient) throws TriddyServiceException {
-        Points points = pointsRepository.findByIdClient(idClient);
+        var points = pointsRepository.findByIdClient(idClient);
         if (points != null){
             return points;
         }else{
@@ -26,7 +26,7 @@ public class PointsServiceImpl implements PointsService {
     @Override
     public void improveLevelUserPoints(String idClient, String level, String discount, String category) {
         try {
-            Points points = getPointsByIdClient(idClient);
+            var points = getPointsByIdClient(idClient);
             points.setLevel(level);
             points.setDiscount(discount);
             points.setCategory(category);
