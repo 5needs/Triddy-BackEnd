@@ -28,11 +28,12 @@ class PointsServiceImplTest {
 
     @Test
     public void addPoints() {
+        PointsServiceImpl pointsServiceImpl = new PointsServiceImpl();
         Points points = new Points("12345","2","3000","Referido");
-        pointsService.addPoints(points);
+        pointsServiceImpl.addPoints(points);
         Points points2 = null;
         try {
-            points2 = pointsService.getPointsByIdClient("12345");
+            points2 = pointsServiceImpl.getPointsByIdClient("12345");
         } catch (TriddyServiceException e) {
             e.printStackTrace();
         }
