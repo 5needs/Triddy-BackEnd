@@ -28,15 +28,14 @@ class PointsServiceTest {
 
     @Test
     public void addPoints() {
-        Points points = new Points("12345","2","3000","Referido");
-        pointsService.addPoints(points);
-        Points points2 = null;
         try {
+            pointsService.addPoints(new Points("12345","2","3000","Referido"));
+            Points points2 = null;
             points2 = pointsService.getPointsByIdClient("12345");
+            assertNotNull(points2.getIdClient());
         } catch (TriddyServiceException e) {
             e.printStackTrace();
         }
-        assertNotNull(points2.getIdClient());
     }
 
 //    @Test
